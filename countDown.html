@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Count Down from a specific date</title>
+  <link rel="stylesheet" href="countDown.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="countdown">
+      <p class="days"></p>
+      <p class="hours"></p>
+      <p class="minutes"></p>
+      <p class="seconds"></p>
+    </div>
+  </div>
+  <script>
+    let destination = new Date('01 January 2023 00:00:00').getTime()
+
+    setInterval(() => {
+      let today = new Date().getTime()
+      const difference = destination - today
+      let seconds = Math.floor(difference / 1000)
+      let minutes = Math.floor(seconds / 60)
+      let hours = Math.floor(minutes / 60)
+      let days = Math.floor(hours / 24)
+
+      seconds %= 60
+      minutes %= 60
+      hours %= 60
+
+      document.querySelector(".days").innerHTML = `${days}<br> days`
+      document.querySelector(".hours").innerHTML = `${hours}<br> hours`
+      document.querySelector(".minutes").innerHTML = `${minutes}<br> minutes`
+      document.querySelector(".seconds").innerHTML = `${seconds}<br> seconds`
+    }, 1000)
+
+
+
+  //  console.log( new Date((parseInt(difference)) * 1000).toISOString())
+
+
+
+
+
+  </script>
+</body>
+
+</html>
