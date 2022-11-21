@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family: 'Oswald', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 400;
 }
 #wrapper{
   display: flex;
@@ -30,5 +31,9 @@
 .countdown p{
   text-align: center;
   padding: 0 2rem;
-  transition: all 0.35s;
+  line-height: 1;
+}
+.countdown p span{display: block;}
+.countdown p span:first-of-type{
+  font-weight: 700;
 }

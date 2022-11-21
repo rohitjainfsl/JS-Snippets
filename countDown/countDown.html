@@ -6,16 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Count Down from a specific date</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="countDown.css">
 </head>
 
 <body>
   <div id="wrapper">
     <div class="countdown">
-      <p class="days"></p>
-      <p class="hours"></p>
-      <p class="minutes"></p>
-      <p class="seconds"></p>
+      <p class="days"><span></span><span>days</span></p>
+      <p class="hours"><span></span><span>hours</span></p>
+      <p class="minutes"><span></span><span>minutes</span></p>
+      <p class="seconds"><span></span><span>seconds</span></p>
     </div>
   </div>
   <script>
@@ -33,10 +36,10 @@
       minutes %= 60
       hours %= 60
 
-      document.querySelector(".days").innerHTML = `${days}<br> days`
-      document.querySelector(".hours").innerHTML = `${hours}<br> hours`
-      document.querySelector(".minutes").innerHTML = `${minutes}<br> minutes`
-      document.querySelector(".seconds").innerHTML = `${seconds}<br> seconds`
+      document.querySelector(".days span:first-of-type").innerHTML = `${days}`
+      document.querySelector(".hours span:first-of-type").innerHTML = `${hours}`
+      document.querySelector(".minutes span:first-of-type").innerHTML = `${minutes}`
+      document.querySelector(".seconds span:first-of-type").innerHTML = `${seconds}`
     }, 1000)
 
 
