@@ -34,13 +34,16 @@
 
       seconds %= 60
       minutes %= 60
-      hours %= 60
+      hours %= 24
 
       document.querySelector(".days span:first-of-type").innerHTML = `${days}`
       document.querySelector(".hours span:first-of-type").innerHTML = `${hours}`
       document.querySelector(".minutes span:first-of-type").innerHTML = `${minutes}`
       document.querySelector(".seconds span:first-of-type").innerHTML = `${seconds}`
     }, 1000)
+
+
+    
 
 
 
