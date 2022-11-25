@@ -32,20 +32,8 @@
     let radioButtons = document.querySelectorAll("input")
     let paragraphs = document.querySelectorAll("p")
 
-    // No property / event can be applied directly on collection
-
-    // radioButtons[0].onclick = () => {
-    //   let value = radioButtons[0].value
-    // }
-    // radioButtons[1].onclick = () => {
-    //   let value = radioButtons[1].value
-    // }
-    // radioButtons[2].onclick = () => {
-    //   let value = radioButtons[2].value
-    // }
-
     for(let i=0;i<radioButtons.length;i++){
-      radioButtons[i].onclick = function(){
+      radioButtons[i].onclick = () => {
         let buttonvalue = radioButtons[i].value
 
         for(let j=0;j<paragraphs.length;j++){
