@@ -114,6 +114,7 @@
       const del = document.createElement("a")
       del.innerHTML = "Delete"
       del.setAttribute("href", "")
+      del.addEventListener("click", deleteRow)
       td.appendChild(del)
       tableRow.appendChild(td)
       
@@ -124,6 +125,12 @@
 
       //clearing the form
       document.querySelector("form").reset()
+    }
+
+
+    function deleteRow(e){
+      e.preventDefault()
+      this.parentElement.parentElement.remove()
     }
   </script>
 </body>
