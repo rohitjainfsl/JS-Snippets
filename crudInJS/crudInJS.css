@@ -2,7 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:  'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: 900;
 }
 .err{
   color: red;
@@ -30,6 +34,7 @@
   border: 1px solid #a6a6a6;
   font-size: 100%;
 }
+
 #wrapper form button{
   cursor: pointer;
   background-color: #faa361;
@@ -47,4 +52,8 @@
   padding: 0.5rem;
   text-align: center;
   border: 1px solid #a6a6a6;
+}
+#wrapper table td a{
+  display: inline-block;
+  padding: 0 0.25rem;
 }

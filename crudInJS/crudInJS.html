@@ -6,6 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD in JS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="crudInJS.css">
 </head>
 
@@ -58,29 +64,36 @@
 
   <script>
     const frm = document.querySelector("form")
+
+    //creating an object
+    const formData = {}
+
     frm.onsubmit = (e) => {
       e.preventDefault();
-      
+
       //gender has to be processed separately
-      let gender = Array.from(document.querySelectorAll(".gender")).filter((g) => {return g.checked})
-      console.log(gender[0].value)
+      let finalGender = ''
+      let gender = document.querySelectorAll(".gender")
+      for (let i = 0; i < gender.length; i++) {
+        if (gender[i].checked === true) {
+          finalGender = gender[i].value
+        }
+      }
+      // console.log(gender[0].value)
 
-
-      //creating an object
-      const formData = {}
 
       //adding properties to object
       formData.sno = ''
-      formData.name = document.querySelector("#name")
-      formData.age = document.querySelector("#age")
-      formData.phone = document.querySelector("#phone")
-      formData.email = document.querySelector("#email")
-      formData.gender = gender[0]
-      formData.hometown = document.querySelector("#hometown")
+      formData.name = document.querySelector("#name").value
+      formData.age = document.querySelector("#age").value
+      formData.phone = document.querySelector("#phone").value
+      formData.email = document.querySelector("#email").value
+      formData.gender = finalGender
+      formData.hometown = document.querySelector("#hometown").value
 
       //getting the table from HTML
       const table = document.querySelector("table");
-      
+
       //getting the count of existing rows in the table
       const trCount = table.children[0].children.length;
 
@@ -97,7 +110,7 @@
         }
         else {
           let td = document.createElement("td")
-          td.innerHTML = formData[x].value
+          td.innerHTML = formData[x]
           tableRow.appendChild(td)
         }
       }
@@ -107,17 +120,18 @@
       const td = document.createElement("td")
 
       const edit = document.createElement("a")
-      edit.innerHTML = "Edit"
+      edit.innerHTML = "<i class='fa-solid fa-pen'></i>"
       edit.setAttribute("href", "")
+      edit.addEventListener("click", editRow)
       td.appendChild(edit)
-      
+
       const del = document.createElement("a")
-      del.innerHTML = "Delete"
+      del.innerHTML = "<i class='fa-solid fa-trash'></i>"
       del.setAttribute("href", "")
       del.addEventListener("click", deleteRow)
       td.appendChild(del)
       tableRow.appendChild(td)
-      
+
 
       //adding the tr to the table
       table.children[0].appendChild(tableRow)
@@ -128,9 +142,40 @@
     }
 
 
-    function deleteRow(e){
+    function deleteRow(e) {
       e.preventDefault()
       this.parentElement.parentElement.remove()
+    }
+
+
+    function editRow(e) {
+      e.preventDefault()
+      console.log(formData)
+      const allTd = this.parentElement.parentElement.children
+      formData.sno = allTd[0].innerHTML
+      formData.name = allTd[1].innerHTML
+      formData.age = allTd[2].innerHTML
+      formData.phone = allTd[3].innerHTML
+      formData.email = allTd[4].innerHTML
+      formData.gender = allTd[5].innerHTML
+      formData.hometown = allTd[6].innerHTML
+
+      for (let x in formData) {
+        if (x !== 'sno') {
+          // console.log(formData[x])
+          if (x === 'gender') {
+            let gender = document.querySelectorAll(".gender")
+            for (let i = 0; i < gender.length; i++) {
+              if (gender[i].value === formData[x]) {
+                gender[i].setAttribute("checked", "checked")
+              }
+            }
+          }
+          else {
+            document.querySelector("#" + x).value = formData[x]
+          }
+        }
+      }
     }
   </script>
 </body>
