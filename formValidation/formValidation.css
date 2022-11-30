@@ -2,6 +2,37 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#wrapper{
+  width: 60%;
+  margin: 2rem auto;
+}
+#wrapper h1{
+  margin-bottom: 2rem;
+}
+input, select{
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+}
+input[type=text], select, button[type=submit]{  
+  width: 400px;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 2px solid #464646;
+}
+button[type=submit]{
+  cursor: pointer;
+  background-color: #5ba25b;
+  border-color: #329f32;
+  color: #fff;
+  transition: all 0.5s;
+  font-weight: bold;
+  font-size: 18px;
+}
+button[type=submit]:hover, button[type=submit]:focus{
+  background-color: #fff;
+  color: #000;
 }
 .err{
   color: red;
