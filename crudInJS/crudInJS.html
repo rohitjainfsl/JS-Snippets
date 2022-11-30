@@ -66,10 +66,19 @@
     const frm = document.querySelector("form")
 
     //creating an object
-    const formData = {}
+    let formData = {}
 
     frm.onsubmit = (e) => {
       e.preventDefault();
+
+      let flag = 'inserting'
+
+      //check whether inserting or updating
+      if (formData.name) {
+        //we are updating data
+        flag = 'updating'
+      }
+
 
       //gender has to be processed separately
       let finalGender = ''
@@ -133,12 +142,21 @@
       tableRow.appendChild(td)
 
 
-      //adding the tr to the table
-      table.children[0].appendChild(tableRow)
+      if (flag === 'inserting') {
+        //adding the tr to the table
+        table.children[0].appendChild(tableRow)
+      }
+      else{
+        table.children[0].children[formData.sno + 2].remove();
+        table.children[0].children[formData.sno].insertAdjacentElement('afterend', table)
+      }
 
 
       //clearing the form
       document.querySelector("form").reset()
+
+      //clearing the object
+      formData = {}
     }
 
 
