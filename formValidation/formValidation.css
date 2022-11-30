@@ -6,7 +6,8 @@
 .err{
   color: red;
 }
-.inputErr{
+.inputErr, .inputErr:focus{
   border: 2px solid red;
   color: red;
+  outline: none;
 }
