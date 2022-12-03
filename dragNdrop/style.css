@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.photos{
+  border: 3px solid;
+  padding: 2rem;
+  margin: 2rem;
+  display: flex;
+}
+.photos div{
+  width: 100px;
+  height: 150px;
+  margin: 0.5rem;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+  background-size: cover;
+}
+#one{
+  background-image: url(unsplh6.jpg);
+}
+#two{
+  background-image: url(unsplh7.jpg);
+}
+#three{
+  background-image: url(unsplh8.jpg);
+}
+#four{
+  background-image: url(unsplh9.jpg);
+}
+img{
+  width: 100%;
+  height: 100%;
+}
+.dashedBorder{
+  border: 4px dashed #0f0;
+}

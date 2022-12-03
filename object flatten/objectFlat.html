@@ -29,9 +29,7 @@
     //   address_office_street: 'Unknown Street'
     // }
 
-    const output = {}
-
-    
+    const output = {}    
     for(x in obj){
       if(typeof obj[x] !== 'object')
         output[x] = obj[x]
@@ -47,6 +45,10 @@
           }
         }
       }
+    }
+
+    function flatten(object){
+      
     }
 
     console.log(output)
