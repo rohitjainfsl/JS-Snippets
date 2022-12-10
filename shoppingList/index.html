@@ -147,6 +147,7 @@
 
       const crossIcon = document.createElement("i")
       crossIcon.classList.add("fa-solid", "fa-circle-xmark", "delete")
+      crossIcon.setAttribute("onclick", "deleteItem(this)")
       para.appendChild(crossIcon)
 
       const nameValue = document.createElement("span")
@@ -159,6 +160,11 @@
 
       document.querySelector("#show ." + select.value + " .items").appendChild(para)
     })
+    
+
+    function deleteItem(element){
+      element.parentElement.remove()
+    }
   </script>
 
 
