@@ -42,6 +42,20 @@ header{
   color: #fff;
   padding: 0.5rem;
 }
+#show .category .delete{
+  cursor: pointer;
+  transition: all 0.35s;
+}
+#show .category .delete:hover{
+  transform: scale(1.1);
+}
+#show .category .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.25rem;
+  margin: 0.25rem;
+}
 footer{
   background-color: #017a5a;
 }
@@ -51,3 +65,27 @@ footer a{
 }
 .fruits-vegetables{border-color: #8fe302}
 .fruits-vegetables h3{background-color: #8fe302}
+
+.meat-seafood{border-color: #f24844}
+.meat-seafood h3{background-color: #f24844}
+
+.dairy{border-color: #fa980f}
+.dairy h3{background-color: #fa980f}
+
+.frozen-foods{border-color: #7479f2}
+.frozen-foods h3{background-color: #7479f2}
+
+.bread-pasta{border-color: #f2d250}
+.bread-pasta h3{background-color: #f2d250}
+
+.snacks{border-color: #e3028a}
+.snacks h3{background-color: #e3028a}
+
+.bevarages{border-color: #0334fd}
+.bevarages h3{background-color: #0334fd}
+
+.cleaning{border-color: #f27b44}
+.cleaning h3{background-color: #f27b44}
+
+.others{border-color: #cacaca}
+.others h3{background-color: #cacaca}
