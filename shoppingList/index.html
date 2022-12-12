@@ -17,8 +17,8 @@
     <header>
       <h1><i class="fa-solid fa-basket-shopping"></i> Shopping List</h1>
     </header>
-    
-    
+
+
     <section id="add">
       <h3>Add New Products</h3>
       <form action="">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-          <a href="">Add To List</a>
+          <button type="submit">Add To List</button>
         </div>
       </form>
     </section>
@@ -134,38 +134,7 @@
     </footer>
   </div>
 
-  <script>
-    const addToList = document.querySelector("form a")
-    addToList.addEventListener("click", function(e){
-      e.preventDefault()
-      const select = document.querySelector("select")
-      const quantity = document.querySelector("#quantity")
-      const name = document.querySelector("#name")
-
-      const para = document.createElement("p")
-      para.classList.add("item")
-
-      const crossIcon = document.createElement("i")
-      crossIcon.classList.add("fa-solid", "fa-circle-xmark", "delete")
-      crossIcon.setAttribute("onclick", "deleteItem(this)")
-      para.appendChild(crossIcon)
-
-      const nameValue = document.createElement("span")
-      nameValue.innerText = name.value
-      para.appendChild(nameValue)
-
-      const quantityValue = document.createElement("span")
-      quantityValue.innerText = quantity.value
-      para.appendChild(quantityValue)
-
-      document.querySelector("#show ." + select.value + " .items").appendChild(para)
-    })
-    
-
-    function deleteItem(element){
-      element.parentElement.remove()
-    }
-  </script>
+  <script src="index.js"></script>
 
 
 </body>
