@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asynchronous</title>
+</head>
+
+<body>
+  <div id="wrapper">
+
+  </div>
+  <script>
+
+    // setTimeout(() => {console.log("first")}, 1000)
+    // console.log("second")
+
+
+    // AJAX: Asynchrnous Javascript And XML
+
+    // XMLHttpRequest, $.ajax, fetch
+
+    // let result = fetch('https://randomuser.me/api/')
+    // console.log(result)
+
+
+
+    // fetch('https://randomuser.me/api/')
+    // .then((response) => {return response.json()})
+    // .then((result) => {console.log(result); showData(result)})
+
+    async function showData() {
+      const response = await fetch('https://randomuser.me/api/')
+      const result = await response.json()
+    }
+    showData()
+
+
+    // function showData(data) {
+    //   const photu = document.createElement("img")
+    //   photu.src = data.results[0].picture.large
+    //   document.body.appendChild(photu)
+    // }
+
+
+  </script>
+</body>
+
+</html>

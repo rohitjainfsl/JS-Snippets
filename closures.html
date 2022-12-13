@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closures</title>
+</head>
+<body>
+  <div id="wrapper"></div>
+
+  <script>
+    // function x(){
+    //   let a = 1;
+    //   return a;
+    // }
+    // x()
+
+    // console.log(a)
+
+
+    // Closures: are functions + their surrounding scope (lexical scope).
+
+    // In simple words, we cant create closure it happens. A closure makes sure that function does not loose connection to variables that existed at the time when the function was created, and does not loose connection to all the variable of its parent function, even after parent function has returned.
+
+
+    // function x(){
+    //   let a = 10;
+    //   return function y(){
+    //     let b = 20;
+    //     return function z(){
+    //       return a + b;
+    //     }        
+    //   }      
+    // }
+
+    // let kuchbhi = x()
+    // document.write(kuchbhi)
+
+
+    function z(){
+      let b = 4;
+      let b = 20;
+      let b = 6;
+      function y(){
+        let a = 1;
+        function x(){
+          console.log(b)
+        }
+        x()
+      }
+      y()
+    }
+    z()
+
+
+
+    function greeting(greet){
+      return function(user){
+        return greet + " " + user       
+      }
+    }
+
+    // const hello = greeting("Namaste")
+
+    // console.log(hello("Ram"))
+
+    console.log(greeting("Namaste")('Ram'))
+
+
+
+  </script>
+</body>
+</html>
