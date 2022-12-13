@@ -119,3 +119,24 @@ footer a{
 
 .others{border-color: #cacaca}
 .others h3{background-color: #cacaca}
+
+
+@media all and (max-width: 992px){
+  #show .category{width: 23%;}
+}
+@media all and (max-width: 768px){
+  #show{
+    justify-content: center;
+    align-items: center;
+  }
+  #show .category{
+    width: 30%;
+  }
+  
+}
+@media all and (max-width: 576px){
+  #show .category{width: 48%;}
+}
+@media all and (max-width: 376px){
+  #show .category{width: 98%;}
+}
