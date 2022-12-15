@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Function</title>
+</head>
+<body>
+  <div id="wrapper">
+
+  </div>
+  <script>
+    // const response = fetch('https://randomuser.me/api/')
+    // console.log(response)
+
+      
+    fetch('https://raw.githubusercontent.com/mdn/content/main/files/en-us/_wikihistory.json')
+    .then((resposnse) => {return resposnse.json()})
+    .then((result) => {console.log(result)})
+    .catch((error) => {console.log(error)})
+
+
+    // async / await
+
+    //Promise.all
+    
+
+
+
+  </script>
+</body>
+</html>

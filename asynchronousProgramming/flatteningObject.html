@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    // const obj = {
+    //   name: 'Elon Musk',
+    //   address: {
+    //     personal: 'Seattle',
+    //     office: {
+    //       name: 'The Boring Company',
+    //       street: 'Unknown Street'
+    //     }
+    //   }
+    // }
+
+
+    // {
+    //   name: 'Elon Musk',
+    //   address_personal: 'Seattle',
+    //   address_personal_office_name: 'The Boring Company'
+    //   address_personal_office_street: 'Unknown Street'
+    // }
+
+
+
+
+    function getOutput(obj, key) {
+      for (const k in obj) {
+        if (k === "street") {
+          output[key + k] = obj[k];
+          return;
+        }
+        if (typeof obj[k] !== "object" && key === "") {
+          output[k] = obj[k];
+        } else if (typeof obj[k] !== "object" && key !== "") {
+          output[key + k] = obj[k];
+        } else {
+          key += k + "_";
+          getOutput(obj[k], key);
+        }
+      }
+      return output;
+    }
+  </script>
+</body>
+
+</html>
