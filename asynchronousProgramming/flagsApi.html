@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using flags api</title>
+  <link rel="stylesheet" href="flagsApi.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="flag-wrapper">
+      <form action="" method="post">
+        <h2>Get Flags</h2>
+        <input type="text" placeholder="Write a country's name" required><br>
+        <button type="submit">Get Flag</button>
+      </form>
+
+      <div class="flag"></div>
+      
+    </div>
+    <p><strong>API: </strong> https://flagpedia.net</p>
+  </div>
+
+  <script>
+    const form = document.querySelector("form")
+    form.onsubmit = (evt) => {
+      evt.preventDefault()
+      const country = form.elements[0].value.toLowerCase()
+
+      if (document.querySelector("img")) {
+        document.querySelectorAll("img").forEach((img) => { img.remove() })
+      }
+
+      fetchData(country)
+    }
+
+    async function fetchData(country) {
+
+      //FETCHING COUNTRY CODES FROM API
+      const response = await fetch('https://flagcdn.com/en/codes.json')
+      const countryCodes = await response.json()
+
+      //CONVERTING CODES TO LOWER CASE
+      for (let code in countryCodes) {
+        countryCodes[code] = countryCodes[code].toLowerCase()
+      }
+
+      //SEARCHING
+      for (let code in countryCodes) {
+        if (countryCodes[code] === country) {
+
+          const flag = document.createElement("img")
+          flag.src = 'https://flagcdn.com/256x192/' + code + ".png"
+          document.querySelector(".flag").appendChild(flag)
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
