@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Diving in Promises</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <p></p>
+  </div>
+  <script>
+    //Let's build an ecommerce store
+
+    //We just created a callback hell / pyramid of doom
+
+    //Inversion of control
+
+    // addOrder(productId, () => {
+    //   updateCart(orderId, () => {
+    //     processPayment(cartId, () => {
+    //       showPaymentSummary()
+    //     })
+    //   })
+    // })
+
+
+    // addOrder(productId)
+    //   .then((productId) => {
+    //     return updateCart()
+    //   })
+    //   .then((orderId) => {
+    //     return processPayment(orderId)
+    //   })
+    //   .then((cartId) => {
+    //     return showPaymentSummary()
+    //   })
+    //   .catch((err) => { console.log("There is an error") })
+
+
+
+    //WHY PROMISES ARE USED?
+
+    //WHAT IS PROMISE CHAINING?
+
+
+
+    //This is how promises are used(consumed), but how to create one of our own
+
+    //Promises are created using promise constructor (new Promise)
+
+
+    //  function addOrder(id){
+    //   return new Promise((resolve, reject) => {
+    //     if(id > 0){
+    //       return resolve()
+    //     }
+    //     else{
+    //       return reject()
+    //     }
+    //   })
+
+    //   // return orderStatus
+    //  }
+
+
+
+    // addOrder(productId) //Jeans
+
+    // addOrder(productId) //Shirt
+
+    // addOrder(productId) //Shoes
+
+    // any(), race(), all(), allSettled()
+
+
+    // const promises = [addOrder(24), addOrder(51), addOrder(99)]
+
+
+    // Promise.any - will output whichever promise is resolved first
+    // Promise.race - will output whichever promise is fulfilled first
+
+    // Promise.all - will output when all the promises are resolved
+    // Promise.allSettled - will output when all the promises are settled(fullfilled)
+
+
+
+
+    //ANY:  takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when any of the input's promises fulfills, with this first fulfillment value. It rejects when all of the input's promises reject (including when an empty iterable is passed), with an AggregateError containing an array of rejection reasons.
+
+
+    // const pErr = new Promise((resolve, reject) => {
+    //   reject("Always fails");
+    // });
+
+    // const pSlow = new Promise((resolve, reject) => {
+    //   setTimeout(reject, 50, "Done eventually");
+    // });
+
+    // const pFast = new Promise((resolve, reject) => {
+    //   setTimeout(reject, 51, "Done quick");
+    // });
+
+    // Promise.any([pErr, pSlow, pFast])
+    // .then((value) => { console.log(value); })
+    // .catch((value) => { console.log(value); })
+
+
+
+
+
+    //ALL: The Promise.all() method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill (including when an empty iterable is passed), with an array of the fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
+
+
+    // const pErr = new Promise((resolve, reject) => {
+    //   resolve("Always fails");
+    // });
+
+    // const pSlow = new Promise((resolve, reject) => {
+    //   setTimeout(resolve, 500, "Done eventually");
+    // });
+
+    // const pFast = new Promise((resolve, reject) => {
+    //   setTimeout(resolve, 100, "Done quick");
+    // });
+
+    // Promise.all([pErr, pSlow, pFast])
+    //   .then((value) => { console.log(value); }) 
+    //   .catch((value) => { console.log(value); }) 
+
+
+
+
+
+    // const p1 = Promise.resolve(3);
+    // const p2 = 1337;
+    // const p3 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("foo");
+    //   }, 100);
+    // });
+
+    // Promise.all([p1, p2, p3]).then((values) => {
+    //   console.log(values); //[3, 1337, 'foo']
+    // });
+
+
+
+
+
+
+    const p1 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve("one"), 1000);
+    });
+    const p2 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve("two"), 2000);
+    });
+    const p3 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve("three"), 3000);
+    });
+    const p4 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve("four"), 4000);
+    });
+    const p5 = new Promise((resolve, reject) => {
+      resolve('Hello');
+    });
+
+    // // Using .catch:
+    Promise.all([p1, p2, p3, p4, p5])
+      .then((values) => {
+        console.log(values);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
