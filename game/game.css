@@ -34,7 +34,9 @@ a {
 
 .avatars {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   width: 50vw;
   margin: 3rem 0;
 }
@@ -87,4 +89,19 @@ a {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.6);
   z-index: 1;
+}
+
+
+@media all and (max-width: 992px){
+  .avatars{
+    width: 90vw;
+  }
+}
+@media all and (max-width: 768px){
+  .avatars{
+    flex-direction: column;
+  }
+  .avatars .avatar img{
+    margin-bottom: 1rem;
+  }
 }
