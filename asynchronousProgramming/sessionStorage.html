@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session Storage & Local Storage</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <button>Increment A</button>
+      <p></p>
+    </div>
+    <script>
+      //Both storage objects help us to retain values even after page reloads.
+      //Local storage retains the values, even after the browser window is closed.
+
+      // let a = 0;
+
+      // const btn =  document.querySelector("button")
+      // const para =  document.querySelector("p")
+      // para.innerHTML = a;
+
+      // btn.onclick = () => {
+      //     a++
+      //     para.innerHTML = a;
+      // }
+
+      // let name = 'Ritik'
+
+      // document.write(name)
+
+      // getItem()
+      // setItem()
+      // removeItem()
+      // clear()
+
+      // sessionStorage.setItem("name","Rohit")
+
+      // document.querySelector("p").innerHTML = sessionStorage.getItem("name")
+
+      sessionStorage.setItem("phone", 1234567890);
+      sessionStorage.setItem("age", 20);
+
+      sessionStorage.removeItem("name");
+      sessionStorage.clear();
+
+      document.querySelector("p").innerHTML = sessionStorage.getItem("phone");
+
+      // localStorage.setItem("name", "Ajeet")
+
+      // localStorage.removeItem("name")
+
+      const numbers = [1, 2, 3, 4, 5, 6];
+
+      //   sessionStorage.setItem("numbers", numbers)
+
+    const numbersJSON = JSON.stringify(numbers)
+
+    // sessionStorage.removeItem(numbers)
+
+    sessionStorage.setItem("numbers", numbersJSON)
+
+    // JSON.parse(numbersJSON)
+
+
+
+    </script>
+  </body>
+</html>
