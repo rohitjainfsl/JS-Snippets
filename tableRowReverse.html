@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Row Reverse</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+        </tr>
+        <tr>
+          <td>Ram</td>
+          <td>12345</td>
+        </tr>
+        <tr>
+          <td>Shyam</td>
+          <td>54321</td>
+        </tr>
+      </table>
+    </div>
+
+    <button>Reverse</button>
+
+    <script>
+      const btn = document.querySelector("button");
+
+      btn.onclick = () => {
+        //selecting all td
+        const allTd = document.querySelectorAll("td");
+
+        //creating array from td
+        const AllTdArray = Array.from(allTd);
+        
+        let j = 0;
+
+        //getting first 2 values and putting them at the end
+        AllTdArray.push(AllTdArray.shift());
+        AllTdArray.push(AllTdArray.shift());
+        
+
+        //emptying the table
+        document.querySelector("table").innerHTML = "";
+
+        //creating the first row
+        const tr = document.createElement("tr");
+
+        //populating it with static content
+        const statictd1 = document.createElement("th");
+        const statictd2 = document.createElement("th");
+        statictd1.innerHTML = "Name";
+        statictd2.innerHTML = "Phone";
+        tr.append(statictd1);
+        tr.append(statictd2);
+
+        //putting the row in table
+        document.querySelector("table").append(tr);
+
+        //creating the next 2 tr and 
+        //populating it with content from array
+        for (let i = 0; i < 2; i++) {
+          const tr = document.createElement("tr");
+          const td1 = document.createElement("td");
+          const td2 = document.createElement("td");
+
+          
+          td1.innerHTML = AllTdArray[j].innerHTML;
+          td2.innerHTML = AllTdArray[++j].innerHTML;
+
+          tr.append(td1);
+          tr.append(td2);
+          document.querySelector("table").append(tr);
+          j++;
+        }
+      };
+    </script>
+  </body>
+</html>
