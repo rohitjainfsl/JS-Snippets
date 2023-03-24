@@ -1,17 +1,4 @@
-const data = [
-  {
-    word: "Computer",
-    hint: "it can do calculations, play sounds and video. You can view the world's information on it",
-  },
-  {
-    word: "python",
-    hint: "It's an animal as well as a programming language",
-  },
-  {
-    word: "morning",
-    hint: "what comes after night",
-  },
-];
+import data from './data.js'
 
 const puzzlesDiv = document.querySelector("#puzzles");
 const form = document.querySelector("form");
@@ -70,7 +57,6 @@ function startCounter() {
   counterDiv.innerHTML = limit;
   interval = setInterval(() => {
     if (limit === 0) {
-      document.querySelector("form").submit();
       submitAnswers();
     } else counterDiv.innerHTML = --limit;
   }, 1000);
