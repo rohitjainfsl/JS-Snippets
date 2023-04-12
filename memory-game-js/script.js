@@ -58,9 +58,11 @@ function randomizePhotos() {
 
   while (j < photos.length) {
     const randomPhoto = photos[recursive(photos, alreadyUsedPhotos)];
-    flip_card[
-      recursive(flip_card, alreadyUsedCards)
-    ].children[0].children[1].children[0].src = "images/" + randomPhoto;
+    for (let i = 0; i < 2; i++) {
+      flip_card[
+        recursive(flip_card, alreadyUsedCards)
+      ].children[0].children[1].children[0].src = "images/" + randomPhoto;
+    }
     j++;
   }
 }
