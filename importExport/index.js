@@ -1,4 +1,4 @@
-import input, {name, sum} from './omi/input.js'
+import input, {name, sum} from './assets/input.js'
 
 input.onblur = () => {
     document.querySelector("p").innerHTML = input.value
