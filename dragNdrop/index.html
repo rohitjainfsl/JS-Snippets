@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drag & drop</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,39 +18,10 @@
     </div>
     <div class="photos drop"></div>
   </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="dragNDrop.js" type="module"></script>
   <script>
-    const drag = document.querySelectorAll(".drag div")
-    const drop = document.querySelector(".drop")
-
-    drag.forEach((photo) => {
-      photo.ondragstart = (e) => {
-        // console.log(e.dataTransfer)
-        const photoId = e.target.id
-        e.dataTransfer.setData('text/plain', photoId)
-        console.log(photoId)
-      }
-    })
-
-    drop.ondragenter = (e) => {
-      console.log("entered in drop div")
-      e.target.classList.add("dashedBorder")
-    }
-    drop.ondragleave = (e) => {
-      console.log("gone out drop div")
-      e.target.classList.remove("dashedBorder")
-    }
-    drop.ondrop = (e) => {
-      console.log("dropped")
-      e.target.classList.remove("dashedBorder")
-      const photoId = e.dataTransfer.getData('text/plain')
-      console.log(photoId)
-      const newDiv = document.createElement("div")
-      newDiv.id = photoId
-      drop.appendChild(newDiv)
-    }
-    drop.ondragover = (e) => {
-      e.preventDefault()
-    }
+    
   </script>
 </body>
 </html>

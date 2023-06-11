@@ -3,11 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+#wrapper{
+  display: flex;
+}
 .photos{
   border: 3px solid;
   padding: 2rem;
   margin: 2rem;
   display: flex;
+  width: 45%;
 }
 .photos div{
   width: 100px;
@@ -36,4 +40,7 @@ img{
 }
 .dashedBorder{
   border: 4px dashed #0f0;
+}
+.dragging{
+  border: 4px dashed #f00;
 }
