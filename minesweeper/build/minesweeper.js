@@ -39,9 +39,6 @@ function getARandomValue() {
 function checkBoxes(allBoxes) {
   allBoxes.forEach((box) => {
     box.addEventListener("click", (e) => {
-      
-      if(box.classList.contains("safe"))  return;
-
       if (randomValues.includes(Number(box.id.slice(3)))) {
         randomValues.forEach((value) => {
           allBoxes[value].classList.add("unsafe");
