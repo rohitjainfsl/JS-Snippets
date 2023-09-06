@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+    <link rel="stylesheet" href="analogClock.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="clock">
+        <div class="needle hour"></div>
+        <div class="needle minutes"></div>
+      </div>
+    </div>
+
+    <script>
+      const mint = document.querySelector(".needle.minutes");
+      const hour = document.querySelector(".needle.hour");
+
+      const dt = new Date();
+      const hours = dt.getHours();
+      const mints = dt.getMinutes();
+
+      mint.style.transform = "rotate(" + mints * 6 + "deg)";
+
+      // if (hours > 12) {
+      //     hour.style.transform = "rotate(" +(hours- 12) * 30 +"deg)"}
+
+      //     else
+      //     {hour.style.transform = "rotate(" +hours * 30 + "deg)"}
+
+      const hourRotationAfter12 = (hours - 12) * 30 + mints / 2;
+      const hourRotationBefore12 = hours * 30 + mints / 2;
+
+      if (hours > 12) {
+        hour.style.transform = "rotate(" + hourRotationAfter12 + "deg)";
+      } else {
+        hour.style.transform = "rotate(" + hourRotationBefore12 + "deg)";
+      }
+
+      console.log((hours - 12) * 30 + mints / 2);
+      console.log(mints);
+      console.log(hours);
+
+      //   const dt = new Date();
+      //   const hours = dt.getHours();
+      //   const minutes = dt.getMinutes();
+      //   const hourNeedle = document.querySelector(".hour");
+      //   const minuteNeedle = document.querySelector(".minutes");
+
+      //   minuteNeedle.style.transform = "rotate(" + minutes * 6 + "deg)";
+
+      //   if (hours > 12) {
+      //     hourNeedle.style.transform = "rotate(" + (hours - 12) * 30 + "deg)";
+      //   } else if (hours < 12) {
+      //     hourNeedle.style.transform = "rotate(-" + (hours - 12) * 30 + "deg)";
+      //   } else {
+      //     hourNeedle.style.transform = "rotate(0)";
+      //   }
+    </script>
+  </body>
+</html>
