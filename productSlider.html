@@ -33,7 +33,9 @@
           </div>
         </div>
         <div class="nav">
-          <button disabled id="prev"><i class="fa-solid fa-chevron-left"></i></button>
+          <button disabled id="prev">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
           <button id="next"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
       </div>
@@ -62,38 +64,42 @@
         const result = await response.json();
         showData(result);
       }
-      fetchData(page);
-
+      
       function showData(data) {
-        loader.style.display = "none";
-        content.style.display = "flex";
+        toggleDisplay("none", "flex")
+
         const img = document.querySelector("img");
         const title = document.querySelector("#title");
         const desc = document.querySelector("#desc");
         const price = document.querySelector("#price span");
-
         img.src = data.image;
         title.innerText = data.title;
         desc.innerText = data.description;
         price.innerText = data.price;
+
+        btns[0].disabled = page > 1 ? false : true;
       }
 
+      function toggleDisplay(loaderDisplay, contentDisplay) {
+        loader.style.display = loaderDisplay;
+        content.style.display = contentDisplay;
+      }
+      
       btns.forEach((btn) => {
         btn.onclick = () => {
           if (btn.id === "prev") {
-            if (page > 1) {
-                page--;
-                btns[0].disabled = false;
-            }
+            if (page > 1) page--;
           } else {
             if (page < 20) page++;
           }
-          loader.style.display = "block";
-          content.style.display = "none";
+          toggleDisplay("flex", "none");
           fetchData(page);
         };
       });
 
+      fetchData(page);
+
+      
     </script>
   </body>
 </html>
