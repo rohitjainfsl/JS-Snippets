@@ -1,5 +1,129 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+body {
+  background-color: #141414;
+}
+img {
+  width: 100%;
+  height: 100%;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+.netflix {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+#sidebar {
+  width: 18%;
+  margin-right: 1%;
+  padding: 1%;
+}
+#sidebar .logo {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+#sidebar .logo img {
+  width: 150px;
+}
+#sidebar ul{
+    position: relative;
+}
+#sidebar ul a {
+  color: #fff;
+  padding: 0.05rem 0;
+  margin: 0.15rem 0;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+#movies {
+  width: 80%;
+}
+.movie-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.movie {
+  width: 23%;
+  margin: 2% 1%;
+  text-align: center;
+  position: relative;
+}
+.movie img {
+  width: 100%;
+  height: 90%;
+  border-radius: 0.25rem;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.movie h3 {
+  margin-top: 0.5rem;
+}
+.movie .trailer-link {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: none;
+  z-index: 1;
+}
+.movie:hover .trailer-link {
+  display: block;
+}
+.movie:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+}
+.movie:hover::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iframe-wrapper {
+  min-width: 700px;
+  max-width: 1000px;
+  width: 50vw;
+  height: 500px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+.sticky {
+  position: sticky;
+  top: 0;
 }
