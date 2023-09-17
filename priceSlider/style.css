@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#wrapper{
+    height: 100vh;
+    width: 70%;
+    margin: 2rem auto;
+}
+.priceSlider{
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+.priceSlider span{
+    position: absolute;
+    bottom: -50%;
+    font-weight: bold;
+}
+.priceSlider span:first-of-type{
+    left: 0;
+}
+.priceSlider span:last-of-type{
+    right: -10%;
+}
+.prices{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.price{
+    width: 30%;
+}
+.price.disabled{
+    pointer-events: none;
+    
+}
+.price.disabled:hover{
+    cursor: none;
+}
