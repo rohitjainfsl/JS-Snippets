@@ -20,7 +20,7 @@ async function fetchTrendingMovies() {
       API_KEY
   );
   movieResults = await response.json();
-//   console.log(movieResults.results)
+  //   console.log(movieResults.results)
   showMovies(movieResults.results);
 }
 
@@ -37,6 +37,7 @@ function showGenres(data) {
 }
 
 function showMovies(data) {
+  moviesDiv.innerHTML = "";
   data.forEach((movie) => {
     const div = document.createElement("div");
     div.classList.add("movie");
@@ -61,6 +62,11 @@ function toggleSidebarStickyness() {
 function filterByGenre(event, element) {
   event.preventDefault();
   let copy = movieResults.results;
+  
+  let output = copy.filter((movie) => {
+    return movie.genre_ids.includes(Number(element.href.split("genre/")[1]));
+  });
+  showMovies(output)
 }
 
 fetchGenres();
