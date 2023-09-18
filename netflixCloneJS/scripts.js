@@ -1,4 +1,4 @@
-const API_KEY = "8125db8f67d23da1d30f6063b1b794b8";
+const API_KEY = YOUR_API_KEY_HERE;
 const img_base_path = "https://image.tmdb.org/t/p/original";
 const moviesDiv = document.querySelector("#movies .movie-wrapper");
 const genreList = document.querySelector(".genreList ul");
