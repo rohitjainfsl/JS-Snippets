@@ -2,6 +2,9 @@ const API_KEY = "8125db8f67d23da1d30f6063b1b794b8";
 const img_base_path = "https://image.tmdb.org/t/p/original";
 const moviesDiv = document.querySelector("#movies .movie-wrapper");
 const genreList = document.querySelector(".genreList ul");
+const modal = document.querySelector(".modal");
+const iframeWrapper = document.querySelector(".iframe-wrapper");
+const closeModal = document.querySelector(".close-modal");
 let movieResults = "";
 
 async function fetchGenres() {
@@ -10,7 +13,6 @@ async function fetchGenres() {
       API_KEY
   );
   const result = await response.json();
-  //   console.log(result.genres);
   showGenres(result.genres);
 }
 
@@ -20,7 +22,6 @@ async function fetchTrendingMovies() {
       API_KEY
   );
   movieResults = await response.json();
-  //   console.log(movieResults.results)
   showMovies(movieResults.results);
 }
 
@@ -45,10 +46,46 @@ function showMovies(data) {
     poster.src = img_base_path + movie.poster_path;
     const title = document.createElement("h3");
     title.innerHTML = movie.name || movie.original_title;
+    const anchor = document.createElement("a");
+    anchor.href = "/trailer/" + movie.id;
+    anchor.classList.add("trailer-link");
+    anchor.innerHTML = "Watch Trailer";
+    anchor.setAttribute("onclick", "watchTrailer(event, this)");
+    div.append(anchor);
     div.append(poster);
     div.append(title);
     moviesDiv.append(div);
   });
+}
+
+async function watchTrailer(event, element) {
+  event.preventDefault();
+  const movieId = element.href.split("trailer/")[1];
+  const response = await fetch(
+    "https://api.themoviedb.org/3/movie/" +
+      movieId +
+      "/videos?language=en-US&api_key=" +
+      API_KEY
+  );
+  const result = await response.json();
+  const trailerObject = result.results.find((resource) => {
+    return resource.site === "YouTube" && resource.type === "Trailer";
+  });
+  const iframe = document.createElement("iframe");
+  iframe.src = "https://youtube.com/embed/" + trailerObject.key;
+  modal.style.display = "flex";
+
+  if (iframeWrapper.childElementCount > 1) {
+    for (let i = 0; i < iframeWrapper.childElementCount; i++) {
+      if (i > 0) iframeWrapper.children[i].remove();
+    }
+  }
+  iframeWrapper.append(iframe);
+}
+
+function closeTrailer(){
+  iframeWrapper.querySelector("iframe").src = ""
+  modal.style.display = "none"
 }
 
 function toggleSidebarStickyness() {
@@ -62,13 +99,15 @@ function toggleSidebarStickyness() {
 function filterByGenre(event, element) {
   event.preventDefault();
   let copy = movieResults.results;
-  
+
   let output = copy.filter((movie) => {
     return movie.genre_ids.includes(Number(element.href.split("genre/")[1]));
   });
-  showMovies(output)
+  showMovies(output);
 }
 
 fetchGenres();
 fetchTrendingMovies();
 window.addEventListener("scroll", toggleSidebarStickyness);
+
+closeModal.addEventListener("click", closeTrailer)

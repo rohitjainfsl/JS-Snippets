@@ -6,6 +6,7 @@
 }
 body {
   background-color: #141414;
+  position: relative;
 }
 img {
   width: 100%;
@@ -35,8 +36,8 @@ a {
 #sidebar .logo img {
   width: 150px;
 }
-#sidebar ul{
-    position: relative;
+#sidebar ul {
+  position: relative;
 }
 #sidebar ul a {
   color: #fff;
@@ -46,12 +47,17 @@ a {
   cursor: pointer;
   transition: all 0.25s;
 }
+.sticky {
+  position: sticky;
+  top: 0;
+}
 #movies {
   width: 80%;
 }
 .movie-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .movie {
   width: 23%;
@@ -97,11 +103,13 @@ a {
 
 .modal {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -115,13 +123,23 @@ a {
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 1rem;
+}
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .close-modal {
   position: absolute;
-  right: 1rem;
-  top: 1rem;
+  right: 0;
+  top: 0;
   cursor: pointer;
+  font-size: 2rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
 }
 .sticky {
   position: sticky;
