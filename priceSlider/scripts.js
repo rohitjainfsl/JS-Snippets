@@ -1,24 +1,26 @@
-const slider = document.querySelector(".priceSlider input")
-const priceDivs = document.querySelectorAll(".price")
+const slider = document.querySelector(".priceSlider input");
+const priceDivs = document.querySelectorAll(".price");
 
-window.addEventListener("load", getValue)
-slider.addEventListener("change", getValue)
+// window.onload = () => {getValue(this)}
+window.addEventListener("load", getValue);
 
-function getValue(elem){
-    if(elem.target.value <= 20) {
-        console.log(priceDivs[0])
-        priceDivs[0].classList.remove("disabled")
-        priceDivs[1].classList.add("disabled")
-        priceDivs[2].classList.add("disabled")
-    }
-    else if(elem.target.value > 20 && elem.target.value <=30){
-        priceDivs[0].classList.add("disabled")
-        priceDivs[1].classList.remove("disabled")
-        priceDivs[2].classList.add("disabled")
-    }
-    else{
-        priceDivs[0].classList.add("disabled")
-        priceDivs[1].classList.add("disabled")
-        priceDivs[2].classList.remove("disabled")
-    }
+// window.onchange = () => {getValue(this)}
+slider.addEventListener("change", getValue);
+
+function getValue(elem) {
+  if (elem.target.value <= 20) {
+    toggleDisabled(0);
+  } else if (elem.target.value > 20 && elem.target.value <= 30) {
+    toggleDisabled(1);
+  } else {
+    toggleDisabled(2);
+  }
+}
+
+function toggleDisabled(divToEnable) {
+  priceDivs.forEach((div, index) => {
+    index === divToEnable
+      ? div.classList.remove("disabled")
+      : div.classList.add("disabled");
+  });
 }
