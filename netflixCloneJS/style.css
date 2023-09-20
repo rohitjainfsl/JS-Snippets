@@ -145,3 +145,30 @@ a {
   position: sticky;
   top: 0;
 }
+
+.paging{
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.paging .page{
+  border: 1px solid #fff;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin: 0.25rem;
+  transition: all 0.35s ease-out;
+}
+.paging .page.active{
+  color: #000;
+  background-color: #fff;
+}
+.paging .page:not(.active):hover{
+  transform: scale(1.2);
+  color: #000;
+  background-color: #fff;
+}
