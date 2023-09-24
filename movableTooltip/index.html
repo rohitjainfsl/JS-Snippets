@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movable Tooltip</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav>
+        <ul>
+          <li>
+            <a href="">Home</a>
+            <span>Home</span>
+          </li>
+          <li>
+            <a href="">About</a>
+            <span>About</span>
+          </li>
+          <li>
+            <a href="">Services</a>
+            <span>Services</span>
+          </li>
+          <li>
+            <a href="">Careers</a>
+            <span>Careers</span>
+          </li>
+          <li>
+            <a href="">Contact</a>
+            <span>Contact</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <script>
+      const anchors = document.querySelectorAll("a");
+
+      anchors.forEach((anchor) => {
+        anchor.onmouseover = (e) => {
+          e.target.nextElementSibling.style.display = "flex";
+        };
+        anchor.onmouseout = (e) => {
+          e.target.nextElementSibling.style.display = "none";
+        };
+        anchor.onmousemove = (e) => {
+          const rect = e.target.getBoundingClientRect();
+          //   console.log(rect.x, rect.y);
+          console.log(e.clientX, e.clientY);
+          e.target.nextElementSibling.style.left = e.clientX - 40 + "px";
+          e.target.nextElementSibling.style.top = e.clientY - 40 + "px";
+        };
+      });
+    </script>
+  </body>
+</html>
