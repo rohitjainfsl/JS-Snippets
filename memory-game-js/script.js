@@ -13,34 +13,36 @@ start.addEventListener("click", () => {
 
   //START THE TIMER
   startTimer();
+
+  //START THE CLICK COUNTER
+  startClickCounter();
 });
 
 flip_card.forEach((card) => {
   card.onclick = (e) => {
-    console.log(e);
     const card_inner = card.children[0];
     const styles = window.getComputedStyle(card_inner);
     if (styles.getPropertyValue("transform") === "none") {
       card_inner.style.transform = "rotateY(180deg)";
       openPhotos++;
-      console.log(openPhotos);
 
       if (openPhotos) {
         setTimeout(() => {
           if (openPhotos === 1) {
             firstClickPhoto = card_inner.children[1].children[0];
-            console.log(firstClickPhoto);
           } else if (openPhotos === 2) {
             secondClickPhoto = card_inner.children[1].children[0];
-            console.log(secondClickPhoto);
             if (firstClickPhoto.src === secondClickPhoto.src) {
               firstClickPhoto.classList.add("matched");
               secondClickPhoto.classList.add("matched");
-              console.log("sab changa si");
+              // 2 cards were clicked & we found a match,
+              // now reset everything
               firstClickPhoto = "";
               secondClickPhoto = "";
               openPhotos = 0;
             } else {
+              // 2 cards were clicked & we didn't found a match,
+              // now reset everything & close the cards
               firstClickPhoto = "";
               secondClickPhoto = "";
               openPhotos = 0;
@@ -114,12 +116,35 @@ function startTimer() {
   const interval = setInterval(() => {
     if (Number(startTimerDiv.innerHTML) === 1) {
       clearInterval(interval);
-      gameOver()
+      gameOver();
     } else startTimerDiv.innerHTML = Number(startTimerDiv.innerHTML) - 1;
   }, 1000);
 }
 
-function gameOver(){
+function startClickCounter() {
+  const gameBoard = document.querySelector("#game-board");
+  const clickCount = document.querySelector("#clickCounter span");
+  console.log(gameBoard.getBoundingClientRect());
+  const gameBoardCoord = gameBoard.getBoundingClientRect();
+
+  //if(user click is inside the game board)
+  // (click.clientX > gameBoard.left && click.clientX < gameBoard.right) && (click.clientY > gameBoard.top && click.clientY < gameBoard.bottom)
+  // the click will be considered inside the game board
+
+  gameBoard.addEventListener("click", (e) => {
+    if (
+      e.clientX > gameBoardCoord.left &&
+      e.clientX < gameBoardCoord.right &&
+      e.clientY > gameBoardCoord.top &&
+      e.clientY < gameBoardCoord.bottom
+    ) {
+      console.log("andar click hua hai");
+      clickCount.innerHTML = Number(clickCount.innerHTML) + 1;
+    }
+  });
+}
+
+function gameOver() {
   document.querySelector("#game").style.display = "none";
   document.querySelector("#startTimer").style.display = "none";
 }
