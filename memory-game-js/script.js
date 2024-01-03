@@ -1,5 +1,6 @@
 const start = document.querySelector("#startBtn");
 const flip_card = document.querySelectorAll(".flip-card");
+const startTimerDiv = document.querySelector("#startTimer");
 let openPhotos = 0;
 let firstClickPhoto = "";
 let secondClickPhoto = "";
@@ -7,7 +8,11 @@ let secondClickPhoto = "";
 start.addEventListener("click", () => {
   document.querySelector("#start").style.display = "none";
   document.querySelector("#game").style.display = "flex";
+  document.querySelector("#startTimer").style.display = "flex";
   randomizePhotos();
+
+  //START THE TIMER
+  startTimer();
 });
 
 flip_card.forEach((card) => {
@@ -22,7 +27,6 @@ flip_card.forEach((card) => {
 
       if (openPhotos) {
         setTimeout(() => {
-          // if (openPhotos > 1) {
           if (openPhotos === 1) {
             firstClickPhoto = card_inner.children[1].children[0];
             console.log(firstClickPhoto);
@@ -30,7 +34,6 @@ flip_card.forEach((card) => {
             secondClickPhoto = card_inner.children[1].children[0];
             console.log(secondClickPhoto);
             if (firstClickPhoto.src === secondClickPhoto.src) {
-              // card_inner.children[1].children[0].classList.add("matched");
               firstClickPhoto.classList.add("matched");
               secondClickPhoto.classList.add("matched");
               console.log("sab changa si");
@@ -44,8 +47,6 @@ flip_card.forEach((card) => {
               closeAll();
             }
           }
-
-          // }
         }, 1000);
       }
     }
@@ -90,16 +91,10 @@ function randomizePhotos() {
 
   while (j < photos.length) {
     const randomPhoto = photos[recursive(photos, alreadyUsedPhotos)];
-    // console.log("randomPhoto", randomPhoto, alreadyUsedPhotos);
     for (let i = 0; i < 2; i++) {
       flip_card[
         recursive(flip_card, alreadyUsedCards)
       ].children[0].children[1].children[0].src = "images/" + randomPhoto;
-      // console.log(
-      //   "while,for : flip card",
-      //   (flip_card[0].children[0].children[1].children[0].src =
-      //     "images/" + randomPhoto)
-      // );
     }
     j++;
   }
@@ -107,15 +102,24 @@ function randomizePhotos() {
 
 function recursive(element, arr) {
   const integer = Math.floor(Math.random() * element.length);
-  // console.log("recursive function, integer", integer);
   if (arr.includes(integer)) {
-    // console.log("recursive", arr);
-
     return recursive(element, arr);
   } else {
     arr.push(integer);
-    // console.log("recursive arr", arr);
-
     return integer;
   }
+}
+
+function startTimer() {
+  const interval = setInterval(() => {
+    if (Number(startTimerDiv.innerHTML) === 1) {
+      clearInterval(interval);
+      gameOver()
+    } else startTimerDiv.innerHTML = Number(startTimerDiv.innerHTML) - 1;
+  }, 1000);
+}
+
+function gameOver(){
+  document.querySelector("#game").style.display = "none";
+  document.querySelector("#startTimer").style.display = "none";
 }

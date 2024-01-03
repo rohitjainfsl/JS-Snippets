@@ -45,6 +45,7 @@ body {
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 3px 4px rgb(0 0 0 / 16%), 1px 1px 2px 2px rgb(0 0 0 / 0%);
+  position: relative;
 }
 #game-container {
   width: 100%;
@@ -97,22 +98,36 @@ body {
 .flip-card img {
   aspect-ratio: 3/4;
 }
+#startTimer {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #fff;
+  height: 40px;
+  width: 40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #000;
+  font-weight: 900;
+}
 
-@media all and (max-width: 1100px){
-  #game{
+@media all and (max-width: 1100px) {
+  #game {
     width: 80%;
   }
 }
-@media all and (max-width: 800px){
-  #game{
+@media all and (max-width: 800px) {
+  #game {
     width: 98%;
     margin-left: 1%;
     margin-right: 1%;
     padding: 0;
   }
 }
-@media all and (max-width: 600px){
-  .flip-card{
+@media all and (max-width: 600px) {
+  .flip-card {
     width: 46%;
     height: 50vh;
   }
