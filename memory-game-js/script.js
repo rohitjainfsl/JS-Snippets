@@ -1,6 +1,8 @@
 const start = document.querySelector("#startBtn");
 const flip_card = document.querySelectorAll(".flip-card");
 let openPhotos = 0;
+let firstClickPhoto = "";
+let secondClickPhoto = "";
 
 start.addEventListener("click", () => {
   document.querySelector("#start").style.display = "none";
@@ -9,19 +11,43 @@ start.addEventListener("click", () => {
 });
 
 flip_card.forEach((card) => {
-  card.onclick = () => {
+  card.onclick = (e) => {
+    console.log(e);
     const card_inner = card.children[0];
     const styles = window.getComputedStyle(card_inner);
     if (styles.getPropertyValue("transform") === "none") {
-      // console.log(styles.getPropertyValue("transform"))
       card_inner.style.transform = "rotateY(180deg)";
       openPhotos++;
-      setTimeout(() => {
-        if (openPhotos > 1) {
-          if (photos_match()) {
-          } else closeAll();
-        }
-      }, 1000);
+      console.log(openPhotos);
+
+      if (openPhotos) {
+        setTimeout(() => {
+          // if (openPhotos > 1) {
+          if (openPhotos === 1) {
+            firstClickPhoto = card_inner.children[1].children[0];
+            console.log(firstClickPhoto);
+          } else if (openPhotos === 2) {
+            secondClickPhoto = card_inner.children[1].children[0];
+            console.log(secondClickPhoto);
+            if (firstClickPhoto.src === secondClickPhoto.src) {
+              // card_inner.children[1].children[0].classList.add("matched");
+              firstClickPhoto.classList.add("matched");
+              secondClickPhoto.classList.add("matched");
+              console.log("sab changa si");
+              firstClickPhoto = "";
+              secondClickPhoto = "";
+              openPhotos = 0;
+            } else {
+              firstClickPhoto = "";
+              secondClickPhoto = "";
+              openPhotos = 0;
+              closeAll();
+            }
+          }
+
+          // }
+        }, 1000);
+      }
     }
   };
 });
@@ -30,7 +56,13 @@ function closeAll() {
   setTimeout(() => {
     openPhotos = 0;
     flip_card.forEach((card) => {
-      card.children[0].removeAttribute("style");
+      if (
+        card.children[0].children[1].children[0].classList.contains(
+          "matched"
+        ) === false
+      ) {
+        card.children[0].removeAttribute("style");
+      }
     });
   }, 400);
 }
@@ -38,7 +70,7 @@ function closeAll() {
 function photos_match() {
   setTimeout(() => {
     openPhotos = 0;
-    return false;
+    return;
   }, 400);
 }
 
@@ -58,10 +90,16 @@ function randomizePhotos() {
 
   while (j < photos.length) {
     const randomPhoto = photos[recursive(photos, alreadyUsedPhotos)];
+    // console.log("randomPhoto", randomPhoto, alreadyUsedPhotos);
     for (let i = 0; i < 2; i++) {
       flip_card[
         recursive(flip_card, alreadyUsedCards)
       ].children[0].children[1].children[0].src = "images/" + randomPhoto;
+      // console.log(
+      //   "while,for : flip card",
+      //   (flip_card[0].children[0].children[1].children[0].src =
+      //     "images/" + randomPhoto)
+      // );
     }
     j++;
   }
@@ -69,10 +107,15 @@ function randomizePhotos() {
 
 function recursive(element, arr) {
   const integer = Math.floor(Math.random() * element.length);
+  // console.log("recursive function, integer", integer);
   if (arr.includes(integer)) {
+    // console.log("recursive", arr);
+
     return recursive(element, arr);
   } else {
     arr.push(integer);
+    // console.log("recursive arr", arr);
+
     return integer;
   }
 }
