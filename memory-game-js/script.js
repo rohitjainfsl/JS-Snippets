@@ -9,6 +9,7 @@ start.addEventListener("click", () => {
   document.querySelector("#start").style.display = "none";
   document.querySelector("#game").style.display = "flex";
   document.querySelector("#startTimer").style.display = "flex";
+  document.querySelector("#clickCounter").style.display = "block";
   randomizePhotos();
 
   //START THE TIMER
