@@ -4,15 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minimum Notes Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="wrapper">
-      <h1>Cash Register</h1>
-      <h4>
-        Enter the bill amount and cash given by the customer and know minumum
-        number of notes to return.
-      </h4>
+      <div class="introDiv">
+        <h1>Cash Register</h1>
+        <h4>
+          Enter the bill amount and cash given by the customer and know minumum
+          number of notes to return.
+        </h4>
+      </div>
 
       <div class="registerDiv">
         <form method="post" id="calculateChange">
@@ -48,7 +56,7 @@
               <td>1</td>
             </tr>
             <tr id="notes">
-              <th>No. of Notes</th>
+              <th>Count</th>
               <td>0</td>
               <td>0</td>
               <td>0</td>
