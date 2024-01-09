@@ -139,4 +139,11 @@ h3 {
     .introDiv h1{
         font-size: 2rem;
     }
+    #returnChange{
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+    #returnChange table th{
+        display: none;
+    }
 }
