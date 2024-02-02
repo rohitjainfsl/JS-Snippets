@@ -4,12 +4,13 @@ const instruments = {
   s: "Snare",
   t: "Tom",
 };
-const wrapper = document.querySelector("#wrapper");
+const rightDiv = document.querySelector("#right");
 
 Object.values(instruments).forEach((instrument) => {
   const box = document.createElement("div");
   const img = document.createElement("img");
   const audio = document.createElement("audio");
+  box.classList.add("box");
 
   img.src = "assets/" + instrument + ".png";
   audio.src = "assets/" + instrument + ".mp3";
@@ -21,7 +22,7 @@ Object.values(instruments).forEach((instrument) => {
     box.children[box.childElementCount - 1].play();
   });
 
-  wrapper.append(box);
+  rightDiv.append(box);
 });
 
 window.addEventListener("keyup", (e) => {
