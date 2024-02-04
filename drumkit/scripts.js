@@ -47,7 +47,14 @@ window.addEventListener("keyup", (e) => {
     setTimeout(() => {
       boxToApplyBackground.style.backgroundColor = "white";
     }, 500);
+
+    const keyDiv = document.createElement("div");
+    keyDiv.classList.add("key");
+    keyDiv.innerHTML = e.key;
+    boxToApplyBackground.append(keyDiv);
+
+    setTimeout(() => {
+      keyDiv.remove();
+    }, 500);
   }
 });
-
-
