@@ -1,134 +1,169 @@
-const startQuiz = document.querySelector("button");
-const questionDiv = document.querySelector(".question");
-const timerDiv = document.querySelector(".timer");
-// const input = document.querySelector(".answer");
-const optionsDiv = document.querySelector(".answers");
-const questions = ["2+2", "3*3+3-3", "4+4+4*0+4"];
-const options = [
-  [0, 3, 1, 4],
-  [3, 33, 9, 12],
-  [4, 0, 12, 8]
+const questions = [
+  { q: "2+2", opt: [1, 2, 3, 4], correct: 4, hasImage: false },
+
+  { q: "2*2*2-8", opt: [8, 0, -2, 1], correct: 0, hasImage: false },
+
+  { q: "3+3+3", opt: [0, 333, 6, 9], correct: 9, hasImage: false },
+
+  { q: "4*4/4", opt: [4, 0, 8, 16], correct: 4, hasImage: false },
+
+  {
+    q: '<img class="photo" src="assets/ram mandir.webp" /> <br> Which monument is this?',
+    opt: ["Taj Mahal", "Red Fort", "Qutub Minar", "Ram Mandir"],
+    correct: "Ram Mandir",
+    hasImage: true,
+  },
 ];
-const actualAnswers = [4, 9, 12];
 
-let randomOrder = [];
+const para = document.querySelector(".question");
+const optionsPara = document.querySelectorAll("#options p");
+const timerDiv = document.querySelector(".timer");
+const counterDiv = document.querySelector("#counter");
+const quizDiv = document.querySelector("#quiz");
+const value = [];
+const userAnswers = [];
+const randomOrder = [];
+const temp = [];
+
+let didUserAnswer = false;
+
+let i = 0;
 let timer = 5;
-let currentQuestionIndex = 0;
-let interval;
-let userAnswers = [];
 
-startQuiz.addEventListener("click", startTheQuiz);
-// startQuiz.onclick = startTheQuiz;
-
-function startTheQuiz() {
-  //show the questions div
-  document.querySelector("#questions").style.display = "flex";
-
-  //hide the button
-  startQuiz.style.display = "none";
-
-  randomOrder = getRandomOrder(questions);
-  // console.log(randomOrder);
-
-  timerDiv.innerHTML = timer--;
-  nextQuestion(currentQuestionIndex);
-
-  interval = setInterval(() => {
-    if (timer === 0) {
-      storeUserAnswer();
-
-      clearOptions();
-
-      timer = 5;
-      timerDiv.innerHTML = 5;
-      nextQuestion(++currentQuestionIndex);
-    }
-    timerDiv.innerHTML = timer--;
-  }, 1000);
+// GENERATE A RANDOM ORDER ON PAGE LOAD
+for (let i = 0; i < questions.length; i++) {
+  randomOrder.push(getARandomValue());
 }
 
-function getRandomOrder(arr) {
-  let temp = [];
-  for (let i = 0; i < arr.length; i++) {
-    let random = Math.floor(Math.random() * arr.length);
-    if (temp.includes(random)) return getRandomOrder(arr);
-    //recursion
-    else temp.push(random);
-  }
-  return temp;
+// CREATING COUNTER
+for (let i = 0; i < questions.length; i++) {  
+  const count = document.createElement("div");
+  count.classList.add("count");
+  count.innerHTML = i + 1;
+  counterDiv.append(count);
 }
 
-function nextQuestion(current) {
-  if (currentQuestionIndex === questions.length) {
-    clearInterval(interval);
-    calculateScore();
+// PRINT FIRST QUESTION INSTANTLY (WITHOUT DELAY)
+printQ();
+timerDiv.innerHTML = timer;
+displayProgress();
+
+// START THE LOOP TO PRINT NEXT QUESTIONS
+const girraj = setInterval(() => {
+  if (timer === 1) {
+    if (didUserAnswer === false) userAnswers.push("NA");
+    printQ();
+    timer = 5;
+    displayProgress();
+
+    timerDiv.innerHTML = timer;
   } else {
-    questionDiv.innerHTML = questions[randomOrder[current]];
+    timer--;
+    timerDiv.innerHTML = timer;
+  }
+}, 1000);
 
-    //SHOW THE OPTIONS
-    showRandomizedOptions(current);
+// WHEN USER CLICKS ON ANY OPTION,
+// APPLY CLASS ON THAT OPTION
+optionsPara.forEach((p, index) => {
+  p.addEventListener("click", () => {
+    p.classList.add("selectedOption");
+    userAnswers.push(p.innerHTML);
+
+    // NOW THAT USER HAS MADE THEIR CHOICE
+    // TOGGLE THE VARIABLE AND,
+    // DISABLE ALL THE OPTIONS TO PREVENT DOUBLE CLICKING
+
+    didUserAnswer = true;
+    disableOptions();
+    console.log(userAnswers);
+  });
+});
+
+function getARandomValue() {
+  const randomValue = Math.floor(Math.random() * questions.length);
+  if (temp.includes(randomValue)) return getARandomValue();
+  else {
+    temp.push(randomValue);
+    return randomValue;
   }
 }
 
-function storeUserAnswer() {
-  let currentAnswer = null;
-  let radios = Array.from(optionsDiv.children);
+function printQ() {
+  // ENABLE THE OPTIONS
+  enableOptions();
 
+  // REMOVE THE SELECTED CLASS
+  removeSelectedClass();
 
+  // TOGGLE VARIABLE TO FALSE
+  didUserAnswer = false;
 
-  radios.forEach((option) => {
-    let input = Array.from(option.children)[0];
-    if (input.checked) {
-      console.log(input.value);
-      currentAnswer = input.value;
-    }
-  });
-  userAnswers.push(currentAnswer);
+  if (i === questions.length) {
+    clearInterval(girraj);
 
-}
+    // COMPARE USER ANSWERS WITH ACTUAL ANSWERS AS PER RANDOM ORDER
+    const score = compareUserAnswers();
 
-function calculateScore() {
-  document.querySelector("#questions").style.display = "none";
-  let score = 0;
-  userAnswers.forEach((answer, index) => {
-    if (answer !== null) {
-      if (Number(answer) === actualAnswers[randomOrder[index]]) score++;
-    }
-  });
-
-  let scoreDisplay = document.createElement("p");
-  // scoreDisplay.innerHTML = "Your score is "+score+ " out of "+questions.length;
-
-  scoreDisplay.innerHTML = `Your score is ${score} out of ${questions.length}`; //Template Literals
-
-  document.querySelector("#quiz").appendChild(scoreDisplay);
-}
-
-function showRandomizedOptions(current) {
-  //GETTING A RANDOM ORDER TO DISPLAY OPTIONS
-  let optionsRandomOrder = getRandomOrder(options[randomOrder[current]]);
-  optionsRandomOrder.forEach((randomOption, index) => {
-    let radio = document.createElement("input");
-    radio.setAttribute("type", "radio");
-    radio.setAttribute("name", "options");
-    radio.setAttribute("value", options[randomOrder[current]][randomOption]);
-
-    let wrapper = document.createElement("label");
-
-    let span = document.createElement("span");
-    span.innerHTML = options[randomOrder[current]][randomOption];
-    wrapper.appendChild(radio);
-    wrapper.appendChild(span);
-    optionsDiv.appendChild(wrapper);
-  });
-}
-
-function clearOptions() {
-  if (optionsDiv.children.length > 0) {
-    let radios = optionsDiv.children;
-    let radioArray = Array.from(radios);
-    radioArray.forEach((option) => {
-      option.remove();
+    // DISPLAY SCORE ON SCREEN
+    showScore(score);
+  } else {
+    para.innerHTML = questions[randomOrder[i]].q;
+    optionsPara.forEach((p, index) => {
+      p.innerHTML = questions[randomOrder[i]].opt[index];
     });
+    i++;
   }
+}
+
+function disableOptions() {
+  optionsPara.forEach((p) => {
+    p.style.pointerEvents = "none";
+  });
+}
+
+function enableOptions() {
+  optionsPara.forEach((p) => {
+    p.style.pointerEvents = "all";
+  });
+}
+
+function removeSelectedClass() {
+  optionsPara.forEach((p) => {
+    if (p.classList.contains("selectedOption"))
+      p.classList.remove("selectedOption");
+  });
+}
+
+function compareUserAnswers() {
+  let score = 0;
+  userAnswers.forEach((userA, index) => {
+    if (questions[randomOrder[index]].hasImage === false) {
+      userA = Number(userA);
+    }
+    if (userA !== "NA" && userA === questions[randomOrder[index]].correct) {
+      score++;
+    }
+  });
+  return score;
+}
+
+function showScore(score) {
+  quizDiv.innerHTML = "";
+  counterDiv.style.display = "none";
+
+  const scorePara = document.createElement("p");
+  scorePara.classList.add("scorePara");
+  scorePara.innerHTML = "Your score is: " + score;
+  quizDiv.append(scorePara);
+}
+
+function displayProgress() {
+  Array.from(counterDiv.children).forEach((counter, index) => {
+    if (index < i) {
+      counter.classList.add("attempted");
+      if(index === i-1) counter.classList.add("current");
+      else  counter.classList.remove("current");
+    }
+  });
 }

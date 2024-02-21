@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz</title>
-  <link rel="stylesheet" href="quiz.css">
-</head>
-<body>
-  <div id="wrapper">
-    <div id="quiz">
-      <button>Start Quiz</button>
-      <div id="questions">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="quiz">
         <p class="timer"></p>
         <p class="question"></p>
-        <div class="answers">
+        <div id="options">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
         </div>
       </div>
-    </div>    
-  </div>
-  <script src="quiz.js"></script>
-</body>
+
+      <div id="counter">
+        
+      </div>
+
+    </div>
+
+    <script src="quiz.js"></script>
+  </body>
 </html>
