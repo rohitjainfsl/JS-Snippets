@@ -1,17 +1,55 @@
 const questions = [
-  { q: "2+2", opt: [1, 2, 3, 4], correct: 4, hasImage: false },
+  {
+    q: "2+2",
+    opt: [1, 2, 3, 4],
+    correct: 4,
+    hasImage: false,
+    AreOptionsImage: false,
+  },
 
-  { q: "2*2*2-8", opt: [8, 0, -2, 1], correct: 0, hasImage: false },
+  {
+    q: "2*2*2-8",
+    opt: [8, 0, -2, 1],
+    correct: 0,
+    hasImage: false,
+    AreOptionsImage: false,
+  },
 
-  { q: "3+3+3", opt: [0, 333, 6, 9], correct: 9, hasImage: false },
+  {
+    q: "3+3+3",
+    opt: [0, 333, 6, 9],
+    correct: 9,
+    hasImage: false,
+    AreOptionsImage: false,
+  },
 
-  { q: "4*4/4", opt: [4, 0, 8, 16], correct: 4, hasImage: false },
+  {
+    q: "4*4/4",
+    opt: [4, 0, 8, 16],
+    correct: 4,
+    hasImage: false,
+    AreOptionsImage: false,
+  },
 
   {
     q: '<img class="photo" src="assets/ram mandir.webp" /> <br> Which monument is this?',
     opt: ["Taj Mahal", "Red Fort", "Qutub Minar", "Ram Mandir"],
     correct: "Ram Mandir",
     hasImage: true,
+    AreOptionsImage: false,
+  },
+
+  {
+    q: "Which of the following is in Punjab?",
+    opt: [
+      '<img class="photo" src="assets/char_minar.jpg" />',
+      '<img class="photo" src="assets/golden_temple.jpg" />',
+      '<img class="photo" src="assets/hawa_mahal.jpg" />',
+      '<img class="photo" src="assets/red_fort.jpg" />',
+    ],
+    correct: '<img class="photo" src="assets/golden_temple.jpg" />',
+    hasImage: true,
+    AreOptionsImage: true,
   },
 ];
 
@@ -36,11 +74,21 @@ for (let i = 0; i < questions.length; i++) {
 }
 
 // CREATING COUNTER
-for (let i = 0; i < questions.length; i++) {  
+for (let i = 0; i < questions.length; i++) {
   const count = document.createElement("div");
   count.classList.add("count");
   count.innerHTML = i + 1;
   counterDiv.append(count);
+}
+
+function displayProgress() {
+  Array.from(counterDiv.children).forEach((counter, index) => {
+    if (index < i) {
+      counter.classList.add("attempted");
+      if (index === i - 1) counter.classList.add("current");
+      else counter.classList.remove("current");
+    }
+  });
 }
 
 // PRINT FIRST QUESTION INSTANTLY (WITHOUT DELAY)
@@ -156,14 +204,4 @@ function showScore(score) {
   scorePara.classList.add("scorePara");
   scorePara.innerHTML = "Your score is: " + score;
   quizDiv.append(scorePara);
-}
-
-function displayProgress() {
-  Array.from(counterDiv.children).forEach((counter, index) => {
-    if (index < i) {
-      counter.classList.add("attempted");
-      if(index === i-1) counter.classList.add("current");
-      else  counter.classList.remove("current");
-    }
-  });
 }
