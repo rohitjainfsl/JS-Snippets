@@ -12,69 +12,9 @@
         <div class="sudoku"></div>
       </div>
 
-      <button>Submit Solution</button>
+      <button id="submit">Submit Solution</button>
     </div>
 
-    <script>
-      const url =
-        "https://sudoku-generator1.p.rapidapi.com/sudoku/generate?seed=1337";
-      const solution =
-        "https://sudoku-generator1.p.rapidapi.com/sudoku/solve?puzzle=..3465..2.862..7..92...7.1.6....234..15....69.42..8.......364717..5.49.3..987.5..";
-      const options = {
-        method: "GET",
-        headers: {
-          
-        },
-      };
-
-      async function fetchData() {
-        try {
-          const response = await fetch(url, options);
-          const result = await response.json();
-          console.log(result);
-          fillSudokuBoard(result.puzzle);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      function fillSudokuBoard(numbers) {
-        const boxes = document.querySelectorAll(".sudoku .box");
-        numbers.split("").forEach((number, index) => {
-          if (number === ".") {
-            const input = document.createElement("input");
-            input.type = "text";
-            input.pattern = "\d.";
-            input.maxLength = "1";
-            input.addEventListener("keyup", checkForNumber);
-            boxes[index].append(input);
-          } else {
-            boxes[index].classList.add("filled");
-            boxes[index].innerHTML = number;
-          }
-        });
-      }
-
-      function generateSudokuBoard(puzzle) {
-        const sudokuDiv = document.querySelector(".sudoku");
-        let counter = 1;
-        for (let i = 0; i < 81; i++) {
-          const box = document.createElement("div");
-          box.classList.add("box");
-          if (counter % 3 === 0) box.style.borderRight = "3px solid";
-          sudokuDiv.append(box);
-          counter++;
-        }
-      }
-
-      function checkForNumber(e) {
-        if (e.keyCode < 48 || e.keyCode > 57) {
-          e.target.value = "";
-        }
-      }
-
-      generateSudokuBoard();
-      fetchData();
-    </script>
+    <script src="scripts.js"></script>
   </body>
 </html>
