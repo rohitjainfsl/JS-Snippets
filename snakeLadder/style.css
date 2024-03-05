@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#board {
+  width: 700px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.row {
+  display: flex;
+}
+.reversed {
+  flex-direction: row-reverse;
+}
+.square {
+  width: 70px;
+  height: 50px;
+  border: 2px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+#board img {
+  position: absolute;
+}
+#board .snake {
+  opacity: 0.8;
+}
+#snake1 {
+  transform: rotate(271deg);
+  top: 91px;
+  left: 10px;
+  width: 50%;
+}
+#snake2 {
+  transform: rotate(297deg);
+  top: 190px;
+  right: -73px;
+  width: 50%;
+}
+#snake3 {
+  transform: rotate(297deg);
+  top: 308px;
+  left: 153px;
+  width: 30%;
+  height: 136px;
+}
+#ladder1 {
+  width: 100px;
+  height: 379px;
+  top: 86px;
+  left: 405px;
+  transform: rotate(355deg);
+  opacity: 0.8;
+}
