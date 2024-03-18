@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#test {
+  width: 80vw;
+  margin: 1rem auto;
+}
+.reference{
+    margin: 1rem 0;
+}
+.reference p{
+    font-size: 18px;
+    line-height: 1.5;
+}
+.user textarea{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 18px;
+}
