@@ -1,5 +1,56 @@
-*{
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+  }
+  
+  #wrapper {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #filter {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .left,
+  .right {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  input[type="text"],
+  select {
+    width: calc(100%);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
-}
+  }
+  
+  select {
+    cursor: pointer;
+  }
+  
