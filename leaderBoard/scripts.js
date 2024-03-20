@@ -27,93 +27,36 @@ const lnameInput = document.querySelector("#lname");
 const scoreInput = document.querySelector("#score");
 let counter = 1;
 
-countries.forEach((country) => {
-  const option = document.createElement("option");
-  option.innerHTML = country.name;
-  // option.value = country.name;
-  option.value = country.flag;
-  select.append(option);
-});
+countries.forEach(createOptions);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // const tr = document.createElement("tr");
   const obj = {};
 
-  //SERIAL NO
-  // const sno = document.createElement("td");
-  // sno.innerHTML = counter;
-  // tr.append(sno);
   obj["sno"] = counter;
   counter++;
 
-  //NAME
-  // const name = document.createElement("td");
-  // name.innerHTML = fnameInput.value + " " + lnameInput.value;
-  // tr.append(name);
   obj["name"] = fnameInput.value + " " + lnameInput.value;
 
   //FLAG
   const flagImage = getFlag(select.value);
-  // const flag = document.createElement("td");
-  // flag.innerHTML = flagImage;
-  // tr.append(flag);
   obj["flag"] = flagImage;
 
   //COUNTRY
   const countryName = getCountryName(select.value);
-  // const country = document.createElement("td");
-  // country.innerHTML = countryName;
-  // tr.append(country);
   obj["country"] = countryName;
 
   //SCORE
-  // const score = document.createElement("td");
-  // score.innerHTML = scoreInput.value;
-  // tr.append(score);
   obj["score"] = scoreInput.value;
 
-  //PLUS 5
-  // const plus5 = document.createElement("td");
-  // plus5.classList.add("circle", "green");
-  // plus5.innerHTML = "+5";
-  // plus5.addEventListener("click", () => {
-  //   plus5.previousElementSibling.innerHTML =
-  //     Number(plus5.previousElementSibling.innerHTML) + 5;
-  // });
-  // tr.append(plus5);
-
-  //MINUS 5
-  // const minus5 = document.createElement("td");
-  // minus5.classList.add("circle", "red");
-  // minus5.innerHTML = "-5";
-  // minus5.addEventListener("click", () => {
-  //   minus5.previousElementSibling.previousElementSibling.innerHTML -= 5;
-  // });
-  // tr.append(minus5);
-
-  //DELETE ICON
-  // const del = document.createElement("td");
-  // del.innerHTML = "<i class='fa fa-trash'></i>";
-  // del.addEventListener("click", () => {
-  //   del.parentElement.remove();
-  // });
-  // tr.append(del);
-
   output.push(obj);
-  // table.append(tr);
 
-  /* NOT ADDING THE ROW ON THE SCREEN
-    INSTEAD ADDING THAT TO THE ARRAY - OUTPUT
-  */
-
-  console.log(output);
-
+  const sortedOutput = sortPerScore(output);
   /* 
     ADDING THE ROW ON SCREEN VIA THE ARRAY
   */
-  displayRow();
+  displayRow(sortedOutput);
 
   //CLEAR OUT THE FORM
 
@@ -122,6 +65,13 @@ form.addEventListener("submit", (e) => {
   scoreInput.value = "";
   select.value = "";
 });
+
+function createOptions(country) {
+  const option = document.createElement("option");
+  option.innerHTML = country.name;
+  option.value = country.flag;
+  select.append(option);
+}
 
 function getFlag(countryName) {
   return (
@@ -149,12 +99,18 @@ function createTH() {
   table.append(tr);
 }
 
-function displayRow() {
-  const sortedOutput = sortPerScore(output);
-
+function displayRow(sortedOutput) {
   //CHECK IF WE NEED TO CREATE TH
   if (table.children.length === 0) createTH();
+  else {
+    //DELETE ALL FOLLOWING ROWS
+    for (let i = 1; i <= table.children.length; i++) {
+      console.log("hello");
+      table.children[i].remove();
+    }
+  }
 
+  //Create rows in loop
   sortedOutput.forEach((row, index) => {
     const tr = document.createElement("tr");
     //SERIAL NO
@@ -168,15 +124,40 @@ function displayRow() {
     tr.append(name);
 
     //FLAG
-    
+    const flag = document.createElement("td");
+    flag.innerHTML = row.flag;
+    tr.append(flag);
 
     //COUNTRY
+    const country = document.createElement("td");
+    country.innerHTML = row.country;
+    tr.append(country);
 
     //SCORE
+    const score = document.createElement("td");
+    score.innerHTML = row.score;
+    tr.append(score);
 
     //+5 -5
+    const modify = document.createElement("td");
+    const plus5 = document.createElement("span");
+    plus5.classList.add("circle", "green");
+    plus5.innerHTML = "+5";
+    modify.append(plus5);
+
+    const minus5 = document.createElement("span");
+    minus5.classList.add("circle", "red");
+    minus5.innerHTML = "-5";
+    modify.append(minus5);
+
+    tr.append(modify);
 
     //DELETE
+    const del = document.createElement("td");
+    del.innerHTML = "<i class='fa fa-trash'></i>";
+    tr.append(del);
+
+    table.append(tr);
   });
 }
 
@@ -184,9 +165,9 @@ function sortPerScore(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[i].score < arr[j].score) {
-        let temp = arr[i].score;
-        arr[i].score = arr[j].score;
-        arr[j].score = temp;
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
       }
     }
   }
