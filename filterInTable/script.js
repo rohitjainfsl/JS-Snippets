@@ -13,8 +13,7 @@ search.addEventListener("keyup", () => {
     emptyTable();
     data.forEach(populateTable);
   } else {
-    let tempData = data;
-    tempData = tempData.filter((dt) => {
+    let tempData = data.filter((dt) => {
       return dt.name.toLowerCase().includes(search.value);
     });
     //EMPTY THE TABLE
@@ -29,8 +28,7 @@ gender.addEventListener("change", () => {
     emptyTable();
     data.forEach(populateTable);
   } else {
-    let tempData = data;
-    tempData = tempData.filter((dt) => {
+    let tempData = data.filter((dt) => {
       return dt.gender === gender.value;
     });
 
@@ -46,8 +44,7 @@ active.addEventListener("change", () => {
     emptyTable();
     data.forEach(populateTable);
   } else {
-    let tempData = data;
-    tempData = tempData.filter((dt) => {
+    let tempData = data.filter((dt) => {
       return (
         dt.lastSeen.slice(dt.lastSeen.lastIndexOf("-") + 1) === active.value
       );
