@@ -33,6 +33,7 @@ body {
 }
 form {
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 form input,
 form select {
@@ -51,43 +52,13 @@ form button {
   font-size: 16px;
 }
 
-table {
-  color: #fff;
-  font-size: 17px;
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
-  margin-top: 1rem;
-}
-th,
-td {
-  padding: 5px;
-}
-th {
-  font-weight: 700;
-}
-table tr:nth-child(2n) {
-  background-color: #aba8a8;
-  color: #000;
-}
-table img {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-}
-
-.circle {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
+.playerRecord {
+  margin-bottom: 1.5rem;
+  background-color: aqua;
+  padding: 1rem 0.5rem;
+  border-radius: 5px;
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  color: #fff;
-}
-.red {
-  background-color: red;
-}
-.green {
-  background-color: green;
 }

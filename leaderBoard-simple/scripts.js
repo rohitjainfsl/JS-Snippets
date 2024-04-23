@@ -24,9 +24,9 @@ function addRecord(e) {
   //PRINTING LEADERBOARD
   printLeaderBoard();
 
-  console.log(leaderBoard);
-
+  //RESETTING THE FORM
   clearInputs();
+  
   firstName.focus();
 }
 
@@ -68,39 +68,3 @@ function printLeaderBoard() {
     board.append(playerRecord);
   });
 }
-
-// function addRecord(e) {
-//   e.preventDefault();
-//   const recordDiv = document.createElement("div");
-//   recordDiv.classList.add("record");
-
-//   const playername = document.createElement("p");
-//   playername.classList.add("name");
-//   recordDiv.append(playername);
-
-//   const playercountry = document.createElement("p");
-//   playercountry.classList.add("country");
-//   recordDiv.append(playercountry);
-
-//   const playerscore = document.createElement("p");
-//   playerscore.classList.add("score");
-//   recordDiv.append(playerscore);
-
-//   const options = document.createElement("p");
-//   options.classList.add("options");
-
-//   const del = document.createElement("i");
-//   del.classList.add("fa-solid", "fa-trash");
-//   options.append(del);
-
-//   const plusFive = document.createElement("span");
-//   plusFive.innerText = "+5";
-//   const minusFive = document.createElement("span");
-//   minusFive.innerText = "-5";
-
-//   options.append(plusFive);
-//   options.append(minusFive);
-//   recordDiv.append(options);
-
-//   board.append(recordDiv);
-// }
