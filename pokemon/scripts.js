@@ -31,22 +31,24 @@ async function getDataFromAPI(url) {
   return result;
 }
 
-function populatePokemons(data) {
-  data.results.forEach(async (pokemon) => {
-    const response = await getDataFromAPI(pokemon.url);
-    console.log(response);
+async function populatePokemons(data) {
+  // Batch fetch Pokémon data
+  const promises = data.results.map((pokemon) => getDataFromAPI(pokemon.url));
+  const pokemonData = await Promise.all(promises);
 
+  // Loop through fetched data and populate DOM
+  pokemonData.forEach((pokemon) => {
     const div = document.createElement("div");
     div.classList.add("parent");
 
     const image = document.createElement("img");
-    image.src = response.sprites.other.dream_world.front_default;
+    image.src = pokemon.sprites.other.dream_world.front_default;
 
     const name = document.createElement("p");
-    name.innerText = response.name;
+    name.innerText = pokemon.name;
 
     const type = document.createElement("p");
-    type.innerText = "Type: " + response.types[0].type.name;
+    type.innerText = "Type: " + pokemon.types[0].type.name;
 
     const knowMore = document.createElement("button");
     knowMore.innerText = "Know More";
@@ -56,14 +58,14 @@ function populatePokemons(data) {
     extraDiv.classList.add("extraDiv");
 
     const height = document.createElement("p");
-    height.innerHTML = "<strong>Height: </strong>" + response.height + " cm";
+    height.innerHTML = "<strong>Height: </strong>" + pokemon.height + " cm";
     extraDiv.append(height);
 
     const weight = document.createElement("p");
-    weight.innerHTML = "<strong>Weight: </strong>" + response.weight + " kg";
+    weight.innerHTML = "<strong>Weight: </strong>" + pokemon.weight + " kg";
     extraDiv.append(weight);
 
-    response.stats.forEach((stat) => {
+    pokemon.stats.forEach((stat) => {
       const para = document.createElement("p");
       para.classList.add("stat");
       para.innerHTML =
