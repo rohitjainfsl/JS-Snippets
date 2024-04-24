@@ -7,7 +7,7 @@ const board = document.querySelector(".board");
 
 form.addEventListener("submit", addRecord);
 
-const leaderBoard = [];
+let leaderBoard = [];
 
 function addRecord(e) {
   e.preventDefault();
@@ -15,7 +15,7 @@ function addRecord(e) {
   playerRecord["id"] = leaderBoard.length + 1;
   playerRecord["name"] = firstName.value + " " + lastName.value;
   playerRecord["country"] = country.value;
-  playerRecord["score"] = score.value;
+  playerRecord["score"] = Number(score.value);
   leaderBoard.push(playerRecord);
 
   //SORTING LEADERBOARD
@@ -26,7 +26,7 @@ function addRecord(e) {
 
   //RESETTING THE FORM
   clearInputs();
-  
+
   firstName.focus();
 }
 
@@ -61,10 +61,63 @@ function printLeaderBoard() {
     score.classList.add("score");
     score.innerText = player.score;
 
+    const icons = document.createElement("div");
+    icons.classList.add("icons");
+
+    const trash = document.createElement("i");
+    trash.classList.add("fa-solid", "fa-trash");
+    trash.addEventListener("click", () => {
+      deleteRecord(player.id);
+    });
+
+    const plus = document.createElement("span");
+    plus.innerText = "+5";
+    plus.addEventListener("click", () => {
+      plusMinusScore(player.id, "+");
+    });
+
+    const minus = document.createElement("span");
+    minus.innerText = "-5";
+    minus.addEventListener("click", () => {
+      plusMinusScore(player.id, "-");
+    });
+
+    icons.append(trash);
+    icons.append(plus);
+    icons.append(minus);
+
     playerRecord.append(name);
     playerRecord.append(country);
     playerRecord.append(score);
+    playerRecord.append(icons);
 
     board.append(playerRecord);
   });
+}
+
+function deleteRecord(id) {
+  leaderBoard = leaderBoard.filter((player) => player.id !== id);
+
+  sortLeaderBoard();
+
+  printLeaderBoard();
+}
+
+function plusMinusScore(id, symbol) {
+  if (symbol === "+") {
+    leaderBoard.map((player) => {
+      if (player.id === id) {
+        player.score += 5;
+      }
+    });
+  } else {
+    leaderBoard.map((player) => {
+      if (player.id === id) {
+        player.score -= 5;
+      }
+    });
+  }
+  sortLeaderBoard();
+
+  printLeaderBoard();
 }

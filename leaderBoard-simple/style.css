@@ -62,3 +62,13 @@ form button {
   justify-content: space-evenly;
   align-items: center;
 }
+.playerRecord .icons {
+  min-width: 100px;
+  max-width: 200px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+.playerRecord .icons * {
+  cursor: pointer;
+}
