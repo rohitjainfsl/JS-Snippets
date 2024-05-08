@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="todoListArrayObject.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <form action="" method="post">
+        <input type="text" placeholder="Enter Task" required autofocus />
+        <button type="submit">Add Task</button>
+      </form>
+
+      <ul></ul>
+    </div>
+    <script>
+      console.log(localStorage.getItem("tasks"));
+      const form = document.querySelector("form");
+      const input = document.querySelector("input");
+      const ul = document.querySelector("ul");
+      const tasks = [];
+
+      form.addEventListener("submit", addTask);
+
+      function addTask(e) {
+        e.preventDefault();
+
+        addTaskToArray();
+
+        displayTasks();
+
+        storeInLS();
+      }
+
+      function addTaskToArray() {
+        const obj = {};
+        obj.id = Date.now();
+        obj.task = input.value;
+        tasks.push(obj);
+      }
+      function storeInLS() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+      function displayTasks() {
+        cleanSlate();
+        tasks.forEach((task) => {
+          const li = document.createElement("li");
+          li.innerText = task.task;
+
+          const del = document.createElement("i");
+          del.classList.add("fa-solid", "fa-trash");
+          del.addEventListener("click", () => deleteTask(task.id));
+
+          const edit = document.createElement("i");
+          edit.classList.add("fa-solid", "fa-pencil");
+          edit.addEventListener("click", () => editTask(task.id));
+
+          li.append(del, edit);
+
+          ul.append(li);
+        });
+      }
+      function deleteTask(id) {
+        console.log(id);
+      }
+      function editTask(id) {
+        console.log(id);
+      }
+      function cleanSlate() {
+        ul.innerHTML = "";
+        input.value = "";
+        input.focus();
+      }
+    </script>
+  </body>
+</html>
