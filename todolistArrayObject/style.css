@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+}
+#todo {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+}
+#todo header h1 {
+  margin-bottom: 2rem;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  word-spacing: 5px;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+}
+form,
+ul {
+  width: 50%;
+  margin-bottom: 1rem;
+}
+form {
+  display: flex;
+  gap: 11px;
+}
+form input,
+form button,
+ul li {
+  border: 1px solid #c1c1c1;
+  border-radius: 5px;
+}
+form input {
+  width: 74%;
+  padding: 6px 12px;
+}
+form button {
+  padding: 6px;
+  cursor: pointer;
+  transition: all 350ms;
+  width: 24%;
+}
+form button:hover {
+  background-color: #fff;
+  color: #000;
+}
+ul li {
+  padding: 6px 12px;
+  margin-bottom: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ul li:nth-of-type(2n) {
+  background-color: #ded3d3;
+}
+ul li:nth-of-type(2n + 1) {
+  background-color: #a17474c7;
+}
+ul li p i {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  cursor: pointer;
+  transition: all 350ms;
+}
+ul li p i:hover {
+  transform: scale(1.2);
+}
+
+@media all and (max-width: 992px) {
+  #todo {
+    width: 80vw;
+  }
+}
+@media all and (max-width: 768px) {
+  #todo {
+    width: 90vw;
+  }
+  form,
+  ul {
+    width: 90%;
+  }
+  #todo header h1 {
+    font-size: 2.5rem;
+  }
+}
+@media all and (max-width: 420px) {
+  #todo {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #todo, form,
+  ul {
+    width: 100%;
+  }
+  #todo header h1 {
+    font-size: 2rem;
+  }
+}
