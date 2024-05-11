@@ -9,6 +9,21 @@ document.getElementById("click-me").addEventListener("click", function () {
   });
 });
 
+// document.getElementById("fetch-images").addEventListener("click", function () {
+//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//     chrome.scripting.executeScript({
+//       target: { tabId: tabs[0].id },
+//       function: fetchImages,
+//     });
+//   });
+// });
+
+document.getElementById('fetch-images').addEventListener('click', function() {
+  chrome.tabs.create({url: 'images.html'});
+});
+
+
+
 function setPageBackgroundColor(color) {
   function isValidColor(strColor) {
     const s = new Option().style;
