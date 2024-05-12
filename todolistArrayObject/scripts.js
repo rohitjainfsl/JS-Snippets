@@ -1,78 +1,106 @@
 const form = document.querySelector("form");
-      const input = document.querySelector("input");
-      const ul = document.querySelector("ul");
-      const tasks = [];
-      let taskToEditID = null;
+const input = document.querySelector("input");
+const ul = document.querySelector("ul");
+const tasks = [];
+let taskToEditID = null;
 
-      form.addEventListener("submit", addTask);
+form.addEventListener("submit", addTask);
+ul.addEventListener("click", handleTaskActions);
 
-      function addTask(e) {
-        e.preventDefault();
+function addTask(e) {
+  e.preventDefault();
 
-        addTaskToArray();
+  if (taskToEditID === null) {
+    addTaskToArray();
+  } else {
+    updateTaskInArray();
+  }
 
-        displayTasks();
+  displayTasks();
+  storeInLS();
+  cleanSlate();
+}
 
-        storeInLS();
-      }
+function addTaskToArray() {
+  const obj = { id: Date.now(), task: input.value };
+  tasks.push(obj);
+  appendTaskToDOM(obj);
+}
 
-      function addTaskToArray() {
-        if (taskToEditID === null) {
-          const obj = {};
-          obj.id = Date.now();
-          obj.task = input.value;
-          tasks.push(obj);
-        } else {
-          const taskToEdit = tasks.find((task) => task.id === taskToEditID);
-          taskToEdit.task = input.value;
-          taskToEditID = null;
-        }
-      }
+function updateTaskInArray() {
+  const taskToEdit = tasks.find((task) => task.id === taskToEditID);
+  if (taskToEdit) {
+    taskToEdit.task = input.value;
+    updateTaskInDOM(taskToEdit);
+  }
+  taskToEditID = null;
+}
 
-      function storeInLS() {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-      }
+function storeInLS() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-      function displayTasks() {
-        cleanSlate();
-        tasks.forEach((task) => {
-          const li = document.createElement("li");
-          li.innerText = task.task;
+function displayTasks() {
+  ul.innerHTML = ""; // Clear once and rebuild if needed
+  tasks.forEach(appendTaskToDOM);
+}
 
-          const iconWrapper = document.createElement("p");
+function appendTaskToDOM(task) {
+  const li = document.createElement("li");
+  li.innerText = task.task;
+  li.dataset.id = task.id;
 
-          const del = document.createElement("i");
-          del.classList.add("fa-solid", "fa-trash");
-          del.addEventListener("click", () => deleteTask(task.id));
+  const iconWrapper = document.createElement("p");
 
-          const edit = document.createElement("i");
-          edit.classList.add("fa-solid", "fa-pencil");
-          edit.addEventListener("click", () => editTask(task.id));
+  const del = document.createElement("i");
+  del.classList.add("fa-solid", "fa-trash");
 
-          iconWrapper.append(del, edit);
+  const edit = document.createElement("i");
+  edit.classList.add("fa-solid", "fa-pencil");
 
-          li.append(iconWrapper);
+  iconWrapper.append(del, edit);
+  li.append(iconWrapper);
+  ul.append(li);
+}
 
-          ul.append(li);
-        });
-      }
+function updateTaskInDOM(task) {
+  const li = ul.querySelector(`li[data-id="${task.id}"]`);
+  if (li) {
+    li.firstChild.textContent = task.task; // Assuming the first child is the text node
+  }
+}
 
-      function deleteTask(id) {
-        tasks.forEach((task, index) => {
-          task.id === id ? tasks.splice(index, 1) : "";
-        });
-        displayTasks();
-        storeInLS();
-      }
+function handleTaskActions(event) {
+  const target = event.target;
+  const li = target.closest("li");
+  const id = parseInt(li.dataset.id);
 
-      function editTask(id) {
-        const taskToEdit = tasks.find((task) => task.id === id);
-        input.value = taskToEdit.task;
-        taskToEditID = id;
-      }
+  if (target.classList.contains("fa-trash")) {
+    deleteTask(id);
+  } else if (target.classList.contains("fa-pencil")) {
+    editTask(id);
+  }
+}
 
-      function cleanSlate() {
-        ul.innerHTML = "";
-        input.value = "";
-        input.focus();
-      }
+function deleteTask(id) {
+  const index = tasks.findIndex((task) => task.id === id);
+  if (index !== -1) {
+    tasks.splice(index, 1);
+    ul.removeChild(ul.children[index]);
+    storeInLS();
+  }
+}
+
+function editTask(id) {
+  const taskToEdit = tasks.find((task) => task.id === id);
+  if (taskToEdit) {
+    input.value = taskToEdit.task;
+    taskToEditID = id;
+    input.focus();
+  }
+}
+
+function cleanSlate() {
+  input.value = "";
+  input.focus();
+}
