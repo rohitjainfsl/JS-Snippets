@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+img {
+  width: 100%;
+  height: 100%;
+}
+#intro {
+  margin: 2rem auto;
+  width: 90%;
+  text-align: center;
+}
+#intro h1 {
+  font-size: 3rem;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
+}
+#introSticky.hide {
+  display: none !important;
+}
+#introSticky {
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  margin: 0 auto;
+  top: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+#introSticky h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.filteration select,
+.filteration input {
+  min-width: 200px;
+  padding: 5px;
+}
+#pokemons {
+  width: 90%;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.pokemon {
+  width: 18%;
+  height: 250px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+.pokemon-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  border: 1px solid #f1f1f1;
+}
+.pokemon:hover .pokemon-inner {
+  transform: rotateY(180deg);
+}
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+.front {
+  -webkit-box-shadow: 10px 10px 21px -11px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 10px 10px 21px -11px rgba(0, 0, 0, 0.57);
+  box-shadow: 10px 10px 21px -11px rgba(0, 0, 0, 0.57);
+  color: black;
+}
+.back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+  padding: 2rem 1rem;
+}
+.pokemon img {
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 190px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+.pokemon-name {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+}
+footer button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #d1d1d1;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: all 350ms;
+}
+footer button:hover {
+  background-color: #000;
+  color: #fff;
+}
