@@ -47,14 +47,19 @@ function searchPokemons(e) {
 }
 
 function filterPokemons(e) {
-  let copy = pokemons;
-  copy = copy.filter((pokemon) => {
-    return pokemon.types[0].type.name === e.target.value;
-  });
-  console.log(copy);
+  if (e.target.value === "") {
+    pokemonsDiv.innerHTML = "";
+    displayPokemons(pokemons);
+  } else {
+    let copy = pokemons;
+    copy = copy.filter((pokemon) => {
+      return pokemon.types[0].type.name === e.target.value;
+    });
+    console.log(copy);
 
-  pokemonsDiv.innerHTML = "";
-  displayPokemons(copy);
+    pokemonsDiv.innerHTML = "";
+    displayPokemons(copy);
+  }
 }
 
 async function loadMorePokemons() {
@@ -82,6 +87,7 @@ function displayPokemons(pokemonsToPrint) {
     const front = document.createElement("div");
     const img = document.createElement("img");
     const name = document.createElement("p");
+    const type = document.createElement("p");
 
     const back = createBackDiv(pokemon);
 
@@ -89,11 +95,14 @@ function displayPokemons(pokemonsToPrint) {
     pokemonInner.classList.add("pokemon-inner");
     front.classList.add("front");
     name.classList.add("pokemon-name");
+    type.classList.add("pokemon-type");
 
     name.innerText = pokemon.name;
     img.src = pokemon.sprites.other.dream_world.front_default;
 
-    front.append(img, name);
+    type.innerHTML = "<strong>Type: </strong>" + pokemon.types[0].type.name;
+
+    front.append(img, name, type);
     pokemonInner.append(front, back);
     pokemonParent.append(pokemonInner);
 
