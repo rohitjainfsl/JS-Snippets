@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+#wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.courseDiv {
+  height: 100%;
+  width: 50%;
+  padding: 4rem;
+}
+.courseWrapper {
+  border: 1px solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  min-height: 350px;
+}
+.courseWrapper li {
+  width: 100%;
+  margin: 0.75rem 0;
+  background-color: #e3e3e3;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.courseWrapper li:hover {
+  transform: scale(1.05);
+}
+
+.left .courseWrapper li:after {
+  content: "+";
+}
+.right .courseWrapper li:after {
+  content: "-";
+}
