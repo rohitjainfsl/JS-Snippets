@@ -55,7 +55,7 @@ function showData(data) {
       const poster = document.createElement("img");
       const name = document.createElement("h3");
 
-      movie.classList.add("movie", "w-[23%]");
+      movie.classList.add("movie", "w-full", "sm:w-[47%]", "md:w-[23%]");
       poster.classList.add("poster", "w-full", "h-3/4");
       name.classList.add("font-bold", "text-xl", "my-2", "text-center");
 
