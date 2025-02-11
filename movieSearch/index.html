@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Search</title>
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <header class="mx-auto w-3/4 text-center my-4">
+        <h2 class="text-3xl font-black mb-4">MOVIE SEARCH</h2>
+        <form action="" class="mb-3 flex gap-2 justify-center">
+          <input
+            type="text"
+            placeholder="Search Anything..."
+            class="border-2 border-blue-500 outline-blue-500 rounded-lg px-6 py-2 text-sm"
+          />
+          <button
+            type="submit"
+            class="border-2 border-blue-500 bg-blue-500 text-white cursor-pointer outline-blue-500 rounded-lg px-6 py-2 text-sm"
+          >
+            Search
+          </button>
+        </form>
+      </header>
+
+      <div id="results" class="px-12 py-4"></div>
+    </div>
+
+    <script src="movies.js"></script>
+  </body>
+</html>
