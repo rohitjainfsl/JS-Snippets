@@ -41,28 +41,35 @@ async function searchMovie(e) {
 function showData(data) {
   resultsDiv.innerHTML = "";
 
-  const resultWrapper = document.createElement("div");
-  resultWrapper.classList.add("resultWrapper", "flex", "flex-wrap", "gap-4");
+  if (data.length === 0) {
+    const h2 = document.createElement("h2");
+    h2.classList.add("font-bold", "text-xl", "text-center");
+    h2.innerText = "No Results... Try another search term";
+    resultsDiv.append(h2);
+  } else {
+    const resultWrapper = document.createElement("div");
+    resultWrapper.classList.add("resultWrapper", "flex", "flex-wrap", "gap-4");
 
-  for (let i = 0; i < data.length; i++) {
-    const movie = document.createElement("div");
-    const poster = document.createElement("img");
-    const name = document.createElement("h3");
+    for (let i = 0; i < data.length; i++) {
+      const movie = document.createElement("div");
+      const poster = document.createElement("img");
+      const name = document.createElement("h3");
 
-    movie.classList.add("movie", "w-[23%]");
-    poster.classList.add("poster", "w-full", "h-3/4");
-    name.classList.add("font-bold", "text-xl", "my-2", "text-center");
+      movie.classList.add("movie", "w-[23%]");
+      poster.classList.add("poster", "w-full", "h-3/4");
+      name.classList.add("font-bold", "text-xl", "my-2", "text-center");
 
-    poster.src = data[i].poster_path
-      ? image_starting_path + data[i].poster_path
-      : "image not found.jpg";
-      
-    name.innerText = data[i].title || data[i].original_title;
+      poster.src = data[i].poster_path
+        ? image_starting_path + data[i].poster_path
+        : "image not found.jpg";
 
-    movie.append(poster, name);
+      name.innerText = data[i].title || data[i].original_title;
 
-    resultWrapper.append(movie);
+      movie.append(poster, name);
+
+      resultWrapper.append(movie);
+    }
+
+    resultsDiv.append(resultWrapper);
   }
-
-  resultsDiv.append(resultWrapper);
 }
