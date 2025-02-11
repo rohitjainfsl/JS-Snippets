@@ -53,7 +53,10 @@ function showData(data) {
     poster.classList.add("poster", "w-full", "h-3/4");
     name.classList.add("font-bold", "text-xl", "my-2", "text-center");
 
-    poster.src = image_starting_path + data[i].poster_path;
+    poster.src = data[i].poster_path
+      ? image_starting_path + data[i].poster_path
+      : "image not found.jpg";
+      
     name.innerText = data[i].title || data[i].original_title;
 
     movie.append(poster, name);
