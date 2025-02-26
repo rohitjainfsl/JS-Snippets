@@ -2,6 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
 }
 #wrapper {
   display: flex;
@@ -65,11 +75,21 @@
   height: 80px;
   overflow: auto;
 }
+.note p {
+  font-size: 14px;
+}
 .close {
   position: absolute;
   top: 5px;
   right: 5px;
   cursor: pointer;
+}
+.edit {
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 10px;
 }
 .undo {
   position: absolute;
@@ -77,9 +97,12 @@
   right: 10px;
   cursor: pointer;
 }
+.input {
+  width: 100%;
+}
 .timestamp {
-  font-size: 12px;
+  font-size: 10px;
   position: absolute;
   bottom: 4px;
-  left: 0;
+  left: 4px;
 }

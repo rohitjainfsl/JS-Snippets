@@ -37,10 +37,10 @@ function displayNotes() {
     // text.innerText = note.text;
     text.innerText = `${note.text}`; //TEMPLATE LITERAL
 
+    //CLOSE ICON
     const close = document.createElement("span");
     close.classList.add("close");
     close.innerHTML = "&times;";
-
     close.addEventListener("click", (e) => {
       const indexToDelete = createdNotes.findIndex((n) => {
         return n.position === note.position;
@@ -54,11 +54,42 @@ function displayNotes() {
       undoButtonStatus();
     });
 
+    //TIMESTAMP
     const timestamp = document.createElement("span");
     timestamp.classList.add("timestamp");
     timestamp.innerText = `${note.timestamp}`;
 
-    noteDiv.append(text, close, timestamp);
+    //EDIT ICON
+    const edit = document.createElement("span");
+    edit.classList.add("edit", "fa-solid", "fa-pen");
+    edit.addEventListener("click", (e) => {
+      const elementToEdit = e.target.parentElement.children[0];
+      const textToEdit = elementToEdit.innerText;
+      elementToEdit.remove();
+      const input = document.createElement("input");
+      input.classList.add("input");
+      input.value = textToEdit;
+
+      input.addEventListener("blur", (e) => {
+        const elementToEdit = e.target.parentElement.children[0];
+        const textToEdit = elementToEdit.value;
+        const para = document.createElement("p");
+        para.innerText = textToEdit;
+        e.target.parentElement.insertBefore(
+          para,
+          e.target.parentElement.children[0]
+        );
+        elementToEdit.remove();
+      });
+
+      e.target.parentElement.insertBefore(
+        input,
+        e.target.parentElement.children[0]
+      );
+      input.focus();
+    });
+
+    noteDiv.append(text, close, timestamp, edit);
     fragment.append(noteDiv);
   });
   notesContainer.append(fragment);
@@ -82,6 +113,3 @@ undo.addEventListener("click", (e) => {
 function undoButtonStatus() {
   undo.disabled = deletedNotes.length === 0 ? true : false;
 }
-
-
-
