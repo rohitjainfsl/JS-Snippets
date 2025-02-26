@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#wrapper {
+  display: flex;
+  height: 100vh;
+}
+.left,
+.right {
+  width: 50%;
+  height: 100%;
+}
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid;
+  background-color: burlywood;
+}
+.left .inputs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.left textarea {
+  width: 30vw;
+  height: 250px;
+  border-radius: 10px;
+  border: 2px solid;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+.left button {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #3b5998;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #3b5998;
+  color: #fff;
+}
+.right {
+  background-color: rgba(165, 42, 42, 0.657);
+  padding: 1rem;
+  position: relative;
+}
+
+.right h2 {
+  text-align: center;
+}
+.notesContainer {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.note {
+  border-radius: 5px;
+  padding: 10px;
+  padding-right: 20px;
+  position: relative;
+  width: 150px;
+  height: 80px;
+  overflow: auto;
+}
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.undo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.timestamp {
+  font-size: 12px;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+}
