@@ -33,14 +33,16 @@ function displayNotes() {
     noteDiv.classList.add("note");
     noteDiv.style.backgroundColor = `${note.color}`;
 
+    const content = document.createElement("div");
+    content.classList.add("content");
+
     const text = document.createElement("p");
     // text.innerText = note.text;
     text.innerText = `${note.text}`; //TEMPLATE LITERAL
 
     //CLOSE ICON
-    const close = document.createElement("span");
-    close.classList.add("close");
-    close.innerHTML = "&times;";
+    const close = document.createElement("i");
+    close.classList.add("close", "fa-solid", "fa-xmark");
     close.addEventListener("click", (e) => {
       const indexToDelete = createdNotes.findIndex((n) => {
         return n.position === note.position;
@@ -48,8 +50,6 @@ function displayNotes() {
       deletedNotes.push(...createdNotes.splice(indexToDelete, 1));
 
       e.target.closest(".note").remove();
-      console.log("created: ", createdNotes);
-      console.log("deleted: ", deletedNotes);
 
       undoButtonStatus();
     });
@@ -59,8 +59,11 @@ function displayNotes() {
     timestamp.classList.add("timestamp");
     timestamp.innerText = `${note.timestamp}`;
 
+    const actions = document.createElement("div");
+    actions.classList.add("actions");
+
     //EDIT ICON
-    const edit = document.createElement("span");
+    const edit = document.createElement("i");
     edit.classList.add("edit", "fa-solid", "fa-pen");
     edit.addEventListener("click", (e) => {
       const elementToEdit = e.target.parentElement.children[0];
@@ -89,7 +92,9 @@ function displayNotes() {
       input.focus();
     });
 
-    noteDiv.append(text, close, timestamp, edit);
+    actions.append(edit, close);
+    content.append(text);
+    noteDiv.append(content, timestamp, actions);
     fragment.append(noteDiv);
   });
   notesContainer.append(fragment);
@@ -102,10 +107,6 @@ undo.addEventListener("click", (e) => {
   createdNotes.sort((a, b) => {
     return a.position - b.position;
   });
-
-  console.log("created: ", createdNotes);
-  console.log("deleted: ", deletedNotes);
-
   displayNotes();
   undoButtonStatus();
 });
