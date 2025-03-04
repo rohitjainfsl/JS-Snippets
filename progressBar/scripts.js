@@ -7,7 +7,7 @@ let queue = 0;
 btn.addEventListener("click", () => {
   if (bars < limit) {
     bars++;
-    createBar(bars);
+    createBar();
   } else {
     queue++;
   }
@@ -16,16 +16,32 @@ btn.addEventListener("click", () => {
 function createBar() {
   const bar = document.createElement("div");
   bar.classList.add("bar");
-  bar.style.animation = "progress 4s linear";
   barsDiv.append(bar);
+
+  const text = document.createElement("span");
+  text.innerText = "0%";
+  bar.append(text);
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 2.56;
+    bar.innerText = Math.round(progress) + "%";
+    bar.style.width = progress + "%";
+
+    if (progress >= 100) {
+      clearInterval(interval);
+    }
+  }, 100);
+
   setTimeout(() => removeBar(bar), 4000);
 }
 
 function removeBar(bar) {
   bar.remove();
-  bar--;
+  bars--;
   if (queue > 0) {
-    createBar();
     queue--;
+    bars++;
+    createBar();
   }
 }
