@@ -3,29 +3,44 @@ const submit = document.querySelector("#submit");
 let puzzleNumbers = "";
 let solution = "";
 
-const url =
-  "https://sudoku-generator1.p.rapidapi.com/sudoku/generate?seed=1337";
-// solution =
-//   "https://sudoku-generator1.p.rapidapi.com/sudoku/solve?puzzle=..3465..2.862..7..92...7.1.6....234..15....69.42..8.......364717..5.49.3..987.5..";
+const url = {
+  question:
+    "https://sudoku-generator1.p.rapidapi.com/sudoku/generate?seed=1337",
+  answer: "https://sudoku-generator1.p.rapidapi.com/sudoku/solve",
+};
 const options = {
   method: "GET",
   headers: {
-    
+    "X-RapidAPI-Key": "",
+    "X-RapidAPI-Host": "sudoku-generator1.p.rapidapi.com",
   },
 };
 
+generateSudokuBoard();
+fetchData();
 submit.addEventListener("click", submitSolution);
+
+function generateSudokuBoard() {
+  const sudokuDiv = document.querySelector(".sudoku");
+  const fragment = document.createDocumentFragment();
+  let counter = 1;
+  for (let i = 0; i < 81; i++) {
+    const box = document.createElement("div");
+    box.classList.add("box");
+    if (counter % 3 === 0) box.style.borderRight = "3px solid";
+    fragment.append(box);
+    counter++;
+  }
+  sudokuDiv.append(fragment);
+}
 
 async function fetchData() {
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url.question, options);
     const result = await response.json();
-    console.log(result);
+
     fillSudokuBoard(result.puzzle);
     puzzleNumbers = result.puzzle;
-    solution =
-      "https://sudoku-generator1.p.rapidapi.com/sudoku/solve?puzzle=" +
-      puzzleNumbers;
   } catch (error) {
     console.error(error);
   }
@@ -48,18 +63,6 @@ function fillSudokuBoard(numbers) {
   });
 }
 
-function generateSudokuBoard(puzzle) {
-  const sudokuDiv = document.querySelector(".sudoku");
-  let counter = 1;
-  for (let i = 0; i < 81; i++) {
-    const box = document.createElement("div");
-    box.classList.add("box");
-    if (counter % 3 === 0) box.style.borderRight = "3px solid";
-    sudokuDiv.append(box);
-    counter++;
-  }
-}
-
 function checkForNumber(e) {
   if (e.keyCode < 48 || e.keyCode > 57) {
     e.target.value = "";
@@ -67,28 +70,24 @@ function checkForNumber(e) {
 }
 
 async function submitSolution(e) {
+  const boxes = document.querySelectorAll(".sudoku .box");
+  const numbersArr = puzzleNumbers.split("");
+  const updatedNumbersArr = numbersArr.map((num, index) => {
+    if (num === "." && boxes[index].children[0].value.length > 0) {
+      num = boxes[index].children[0].value;
+      return num;
+    }
+    return num;
+  });
+  solution = updatedNumbersArr.join("");
+
   try {
-    const response = await fetch(solution, options);
+    const response = await fetch(url.answer + "?puzzle=" + solution, options);
     const result = await response.json();
-    console.log(result);
-    const userSubmission = getUserSubmission();
-    if (result.solution === userSubmission) console.log("Well Done");
+
+    if (result.solution === solution) console.log("Well Done");
     else console.log("Better luck next time");
   } catch (error) {
     console.error(error);
   }
 }
-
-function getUserSubmission() {
-  const boxes = document.querySelectorAll(".sudoku .box");
-  let userSubmission = "";
-  boxes.forEach((box, index) => {
-    if (box.childElementCount > 0) userSubmission += box.children[0].value;
-    else userSubmission += box.innerHTML;
-  });
-  console.log(userSubmission);
-  return userSubmission;
-}
-
-generateSudokuBoard();
-fetchData();
