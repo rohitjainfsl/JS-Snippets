@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Count Down from a specific date</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="countDown.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="countdown">
+      <p class="days"><span></span><span>days</span></p>
+      <p class="hours"><span></span><span>hours</span></p>
+      <p class="minutes"><span></span><span>minutes</span></p>
+      <p class="seconds"><span></span><span>seconds</span></p>
+    </div>
+  </div>
+  <script>
+    let destination = new Date('01 January 2023 00:00:00').getTime()
+
+    setInterval(() => {
+      let today = new Date().getTime()
+      const difference = destination - today
+      let seconds = Math.floor(difference / 1000)
+      let minutes = Math.floor(seconds / 60)
+      let hours = Math.floor(minutes / 60)
+      let days = Math.floor(hours / 24)
+
+      seconds %= 60
+      minutes %= 60
+      hours %= 24
+
+      document.querySelector(".days span:first-of-type").innerHTML = `${days}`
+      document.querySelector(".hours span:first-of-type").innerHTML = `${hours}`
+      document.querySelector(".minutes span:first-of-type").innerHTML = `${minutes}`
+      document.querySelector(".seconds span:first-of-type").innerHTML = `${seconds}`
+    }, 1000)
+
+
+
+  </script>
+</body>
+
+</html>

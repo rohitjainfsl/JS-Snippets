@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: bisque;
+    height: 100vh;
+}
+#wrapper{
+    width: 70%;
+    margin: 2rem auto;
+    background-color: #fff;    
+    padding: 2rem;
+}
+.priceSlider{
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+.priceSlider span{
+    position: absolute;
+    bottom: -50%;
+    font-weight: bold;
+}
+.priceSlider span:first-of-type{
+    left: 0;
+}
+.priceSlider span:last-of-type{
+    right: -10%;
+}
+.prices{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;    
+}
+.price{
+    background-color: aqua;
+    width: 30%;
+    margin: 1%;
+    padding: 1%;
+}
+.price.disabled{
+    pointer-events: none;
+    background-color: #666;
+}
+.price.disabled:hover{
+    cursor: none;
+}

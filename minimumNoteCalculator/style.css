@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+}
+a {
+  text-decoration: none;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+#wrapper,
+#wrapper > div {
+  height: 100vh;
+  display: flex;
+}
+#wrapper {
+  justify-content: space-between;
+  align-items: center;
+}
+#wrapper > div {
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 3rem;
+}
+.introDiv {
+  background-image: url(cash-register.avif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.introDiv:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.introDiv > * {
+  position: relative;
+  color: #fff;
+}
+.introDiv h1 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  filter: drop-shadow(2px 4px 6px black);
+}
+.introDiv h4 {
+  text-align: center;
+}
+
+.registerDiv form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 60%;
+  min-width: 250px;
+  padding: 1rem;
+  background-color: #000;
+  border-radius: 1rem;
+}
+.registerDiv form input {
+  margin-bottom: 0.5rem;
+  height: 32px;
+  padding: 0.25rem;
+}
+.registerDiv form button {
+  padding: 0.25rem;
+  background-color: #7e57c2;
+  color: #fff;
+}
+.registerDiv form, #returnChange{
+    width: 75%;
+    min-width: 250px;
+    padding: 1rem;
+    background-color: #000;
+    border-radius: 1rem;
+}
+#returnChange{
+    color: #fff;
+    text-align: center;
+}
+#returnChange h2{
+    margin-bottom: 1rem;
+}
+#returnChange table{
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 100%;
+}
+#returnChange table th, #returnChange table td{
+    border: 1px solid;
+    padding: 0.25rem;
+}
+
+@media all and (max-width: 1200px){
+    #wrapper > div{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    .registerDiv form, #returnChange{
+        width: 100%;
+    }
+}
+@media all and (max-width: 1080px){
+    .introDiv h1{
+        font-size: 3rem;
+    }
+}
+@media all and (max-width: 768px){
+    #wrapper{
+        flex-direction: column;
+    }
+    #wrapper > div {
+        width: 100%;
+    }
+    .introDiv{
+        height: 30vh !important;
+    }
+    .registerDiv{
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+}
+@media all and (max-width: 480px){
+    #wrapper > div {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .introDiv h1{
+        font-size: 2rem;
+    }
+    #returnChange{
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+    #returnChange table th{
+        display: none;
+    }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="expenseTracker.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="screens">
+        <div id="screen1">
+          <input type="text" placeholder="Enter your budget for this month" required autofocus />
+          <button>Set Budget</button>
+        </div>
+        <div id="screen2" class="disabled">
+          <div id="information">
+            <div id="info">
+              <h3 id="totalHeading">Total: <span></span></h3>
+              <h3 id="spentHeading">Spent: <span></span></h3>
+              <h3 id="remainingHeading">Remaining: <span></span></h3>
+            </div>
+          </div>
+
+          <div id="enterExpense">
+            <form action="">
+              <input type="text" placeholder="Expense Detail" required /><br />
+              <input type="text" placeholder="Expense Amount" required /><br />
+              <button type="submit">Add Expense</button>
+            </form>
+          </div>
+
+          <div id="expenseTracker">
+            <table>
+              <tr>
+                <th>S.No</th>
+                <th>Info</th>
+                <th>Amount</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="expenseTracker.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  #wrapper {
+    height: 100vh;
+    background-color: beige;
+  }
+  #wrapper,
+  #slider .loader,
+  #slider .content,
+  #slider .content div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #slider {
+    padding: 2rem;
+    width: 60vw;
+    min-width: 250px;
+    max-width: 750px;
+    min-height: 400px;
+    max-height: 600px;
+    height: 50vh;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 4px 6px #cccccccf;
+    position: relative;
+  }
+  #slider .loader {
+    width: 100%;
+    height: 100%;
+  }
+  #slider .content {
+    display: none;
+    height: 100%;
+  }
+  #slider .left {
+    width: 35%;
+    margin-right: 3%;
+  }
+  #slider .right {
+    width: 60%;
+    align-items: flex-start !important;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #slider img {
+    width: 100%;
+    object-fit: contain;
+  }
+  #slider .content div,
+  #slider img {
+    height: 100%;
+  }
+  #slider .nav button {
+    position: absolute;
+    top: 50%;
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  #slider .nav button:disabled {
+    cursor: not-allowed;
+  }
+  #slider .nav button:first-of-type {
+    left: -2%;
+  }
+  #slider .nav button:last-of-type {
+    right: -2%;
+  }
+  
+  @media all and (max-width: 1200px) {
+    #slider {
+      width: 70vw;
+    }
+  }
+  @media all and (max-width: 768px) {
+    #slider {
+      width: 90vw;
+    }
+  }
+  @media all and (max-width: 540px) {
+    #slider {
+      height: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    #slider .content {
+      flex-direction: column;
+    }
+    #slider .content div {
+      width: 100%;
+    }
+    #slider img {
+      max-width: 300px;
+      min-width: 150px;
+      max-height: 200px;
+      min-width: 100px;
+    }
+  }
+  

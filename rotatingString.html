@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating String</title>
+  <style>
+    .letter-dancing{
+      height: 100vh;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="letter-dancing">
+      <p>Javascript</p>
+      <button>Start the Effect</button>
+      <button>Stop the Effect</button>
+    </div>
+
+  </div>
+  <script>
+    const start = document.querySelector("button:first-of-type")
+    const stop = document.querySelector("button:last-of-type")
+    const str = document.querySelector("p").innerHTML;
+    let interval;
+    // let str = 'Javascript'
+
+    // // let len = str.length;
+
+    let letters = str.split("")
+
+    start.onclick = () => {
+      interval = setInterval(() => {
+        let lastLetter = letters.pop()
+        letters.splice(0, 0, lastLetter)
+        document.querySelector("p").innerHTML = letters.join("")
+      }, 1000)
+    }
+    stop.onclick = () => {
+      clearInterval(interval);
+      document.querySelector("p").innerHTML = str;
+    }
+
+
+
+    let arr = [2,43,[12,11,10], [4,5,6], 55, [10,19], 4]
+    let output = []
+
+    arr.forEach((value) => {
+      if(typeof(value) === 'object'){
+        output.push(...value)
+      }
+      else{
+        output.push(value)
+      }
+    })
+    console.log(output)
+
+    console.log(output.reduce((first,second) => {
+      return first+second
+    }))
+    
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Loading with XHR</title>
+</head>
+
+<body>
+  <!-- AJAX - Asyncronous Javscript And XML -->
+  <button id="xhr">Click to start request</button>
+  <button id="reload">Reload</button>
+
+  <pre readonly class="event-log"></pre>
+  <script>
+    const log = document.querySelector('.event-log');
+
+    document.querySelector('#xhr').addEventListener('click', () => {
+      log.textContent = '';
+
+      const xhr = new XMLHttpRequest();
+
+      xhr.addEventListener('loadend', () => {
+        log.textContent = `${log.textContent}Finished with status: ${xhr.status}`;
+      });
+
+      xhr.open('GET', 'https://raw.githubusercontent.com/mdn/content/main/files/en-us/_wikihistory.json');
+      xhr.send();
+      log.textContent = `${log.textContent}Started XHR request\n`;
+    });
+
+    document.querySelector('#reload').addEventListener('click', () => {
+      log.textContent = '';
+      document.location.reload();
+    });
+
+  </script>
+</body>
+
+</html>

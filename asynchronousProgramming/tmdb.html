@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using TMDB</title>
+  <link rel="stylesheet" href="tmdb.css">
+</head>
+<body>
+  <div id="wrapper">
+    <div id="search">
+      <form action="" method="post">
+        <input type="text" placeholder="Search Movie" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <div id="movie-listing"></div>
+  </div>
+  <script>
+
+    const form = document.querySelector("form")
+
+    const api_key = '8125db8f67d23da1d30f6063b1b794b8'
+    const img_base_path = 'https://image.tmdb.org/t/p/original/'
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault()
+
+      cleanUp()
+      const input = form.elements[0]
+
+      const endPoint = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${input.value}&page=1&include_adult=false`
+
+      const response = await fetch(endPoint)
+      const movieData = await response.json()
+
+      console.log(movieData.results)
+
+      movieData.results.forEach((movie) => {
+        const movieWrapper = document.createElement("div")
+        movieWrapper.classList.add("movie-wrapper")
+        const moviePoster = document.createElement("img")
+        const movieName = document.createElement("h2")
+
+        moviePoster.src = img_base_path + movie.poster_path
+        movieWrapper.appendChild(moviePoster)
+
+        movieName.innerHTML = movie.title
+        movieWrapper.appendChild(movieName)
+
+        document.querySelector("#movie-listing").appendChild(movieWrapper)
+
+      })
+      
+    })
+
+    function cleanUp(){
+      const movieListDiv = document.querySelector("#movie-listing")
+      if(movieListDiv.children.length > 0){
+        movieListDiv.children.forEach((movieList) => {movieList.remove()})
+      }
+    }
+
+
+
+
+
+    // fetch('https://api.themoviedb.org/3/movie/550?api_key=8125db8f67d23da1d30f6063b1b794b8')
+    // .then((response) => {return response.json()})
+    // .then((result) => {console.log(result); showData(result)})
+
+
+    // function showData(result){
+    //   const div = document.createElement("div")
+    //   div.classList.add("movie-wrapper")
+    //   const poster = document.createElement("img")
+    //   poster.src = img_base_path + result.poster_path
+
+    //   div.appendChild(poster)
+
+    //   document.querySelector("#wrapper").appendChild(div)
+    // }
+
+
+
+    // call, bind, apply, nullish coalescence, optional chaining, generators, intro to XHR
+
+    // Intro to React Environment: webpack, parcel, babel.
+
+    // Installation with CRA & Vite
+
+    // API Proxy
+
+
+
+  </script>
+</body>
+</html>

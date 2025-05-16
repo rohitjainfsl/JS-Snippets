@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="formValidation.css">
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Form Validation</h1>
+    <form action="">
+      <input autofocus type="text" id="name" placeholder="Enter your name"><span class="err"></span><br>
+      
+      <input type="text" id="age" placeholder="Enter your age"><span class="err"></span><br>
+      
+      <input type="text" id="phone" placeholder="Enter your phone"><span class="err"></span><br>
+      
+      <input type="text" id="email" placeholder="Enter your email"><span class="err"></span><br>
+      
+      <input class="gender" type="radio" name="gender" value="male">Male
+      <input class="gender" type="radio" name="gender" value="female">Female
+      <input class="gender" type="radio" name="gender" value="other">Other
+      <span class="err"></span><br>
+
+      <select name="" id="hometown">
+        <option value="" selected disabled>Select Hometown</option>
+        <option value="Jaipur">Jaipur</option>
+        <option value="Jodhpur">Jodhpur</option>
+        <option value="Ajmer">Ajmer</option>
+        <option value="Kota">Kota</option>
+        <option value="Pilani">Pilani</option>
+        <option value="Nagaur">Nagaur</option>
+      </select>
+      <span class="err"></span><br>
+
+      <button type="submit">Submit</button>
+    </form>
+
+
+  </div>
+  <script>
+
+    // Regular Expressions: (regex): are patterns used to match user input
+    // Written between / and /
+    // ^ and $ denote regex starting and ending
+    // allowed characters are written between [ and ]
+    // + - one or more times matching is allowed
+    // { } - specify range
+    // \ (backslash) tells regex to forget the default meaning of any special character. To escape the sp char from regex.
+
+
+
+
+
+    let frm = document.querySelector("form")
+
+    frm.onsubmit = (e) => {
+      e.preventDefault();
+      let name = document.querySelector("#name")
+      let age = document.querySelector("#age")
+      let phone = document.querySelector("#phone")
+      let email = document.querySelector("#email")
+      let radios = document.querySelectorAll(".gender")
+      let hometown = document.querySelector("#hometown")
+
+
+      let nameExp = /^[a-zA-Z ]{3,30}$/
+      let ageExp = /^[0-9]{2}$/
+      let phoneExp = /^[0-9]{10}$/
+      let emailExp = /^[a-zA-Z0-9\.\_\+]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,5}$/
+
+
+      if(matchElement(name, nameExp, "Enter only alphabets. Length 3-30")){
+        if(matchElement(age, ageExp, "Enter only numbers. Allowed Values 10-99")){
+          if(matchElement(phone, phoneExp, "Enter only numbers. Exact 10 numbers allowed")){
+            if(matchElement(email, emailExp, "Enter a vlaid email")){
+              if(matchElement2(radios, "Select gender")){
+                if(matchElement3(hometown, "Select your hometown")){
+                  document.querySelector("form").submit();
+                }
+              }
+            }
+          }
+        }
+      }
+      return false;
+
+    }
+
+    function matchElement(element, regex, msg){
+      if(element.value.match(regex)){
+        element.nextElementSibling.innerHTML = '';
+        element.classList.remove("inputErr");
+        return true;
+      }
+      else{
+        element.nextElementSibling.innerHTML = msg;
+        element.classList.add("inputErr");
+        element.focus();
+        return false;
+      }
+    }
+
+    function matchElement2(elements, msg){
+      // console.log(Array.from(elements)[elements.length - 1])
+      let flag = false;
+      elements.forEach((element) => {
+        if(element.checked){
+          flag = true;
+        }
+      })
+      if(flag === false){
+        Array.from(elements)[elements.length - 1].nextElementSibling.innerHTML = msg;
+        return false;
+      }
+      else{
+        Array.from(elements)[elements.length - 1].nextElementSibling.innerHTML = '';
+        return true;
+      }
+    }
+  
+  
+    function matchElement3(element, msg){
+      if(element.value.length === 0){
+        element.nextElementSibling.innerHTML = msg;
+        element.classList.add("inputErr")
+        return false;
+      }
+      else{
+        element.nextElementSibling.innerHTML = '';
+        element.classList.remove("inputErr")
+        return true;
+      }
+    }
+
+
+  
+  </script>
+</body>
+</html>

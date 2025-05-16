@@ -1,0 +1,60 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Oswald', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 400;
+}
+#wrapper{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: url('happyNewYear.webp') no-repeat scroll center / cover;
+  position: relative;
+}
+#wrapper:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.countdown{
+  font-size: 400%;
+  display: flex;
+  color: #fff;
+  position: relative;
+}
+.countdown p{
+  text-align: center;
+  padding: 0 2rem;
+  line-height: 1;
+}
+.countdown p span{display: block;}
+.countdown p span:first-of-type{
+  font-weight: 700;
+}
+
+
+@media all and (max-width: 900px){
+  .countdown{font-size: 350%;}
+  .countdown p{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media all and (max-width: 760px){
+  .countdown{flex-wrap: wrap;}
+  .countdown p{
+    width: 50%;
+    padding: 2rem;
+  }
+}
+
+@media all and (max-width: 420px){
+  .countdown{font-size: 200%;}
+}

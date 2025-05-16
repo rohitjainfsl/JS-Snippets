@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome Checker</title>
+</head>
+<body>
+  <div id="wrapper">
+    <input type="text" placeholder="Write a word" required>
+    <button>Check Palindrome</button>
+  </div>
+  <script>
+    const btn = document.querySelector("button")
+    const para = document.createElement("p")
+    btn.onclick = () => {
+      const word = document.querySelector("input").value.toLowerCase();
+      const wordReverse = word.split('').reverse().join('');
+      para.innerHTML = (word === wordReverse) ? "Word is a Palindrome" : "Word is not a Palindrome";
+      document.querySelector("#wrapper").appendChild(para);
+    }
+  </script>
+</body>
+</html>

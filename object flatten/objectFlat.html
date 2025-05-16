@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flatten an object</title>
+</head>
+<body>
+  <div id="wrapper">
+
+  </div>
+  <script>
+    const obj = {
+      name: 'Elon Musk',
+      address:{
+        personal: 'Seattle',
+        office:{
+          name: 'The Boring Company',
+          street: 'Unknown Street'
+        }
+      }
+    }
+    console.log(obj)
+    // {
+    //   name: 'Elon Musk',
+    //   address_personal: 'Seattle',
+    //   address_office_name: 'The Boring Company',
+    //   address_office_street: 'Unknown Street'
+    // }
+
+    const output = {}    
+    for(x in obj){
+      if(typeof obj[x] !== 'object')
+        output[x] = obj[x]
+      else{
+        for(y in obj[x]){
+          if(typeof obj[x][y] !== 'object'){            
+            output[x+"_"+y] = obj[x][y]
+          }
+          else{
+            for(z in obj[x][y]){
+              output[x+"_"+y+"_"+z] = obj[x][y][z]
+            }
+          }
+        }
+      }
+    }
+
+    function flatten(object){
+      
+    }
+
+    console.log(output)
+  </script>
+</body>
+</html>

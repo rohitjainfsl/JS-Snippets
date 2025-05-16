@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="pokemon.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="intro">
+        <h1>Pokemon Universe</h1>
+
+        <div class="filteration">
+          <select name="" id="filterByType">
+            <option value="" selected>Filter By Type</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="poison">Poison</option>
+            <option value="fighting">Fighting</option>
+            <option value="ice">Ice</option>
+            <option value="ground">Ground</option>
+            <option value="grass">Grass</option>
+            <option value="electric">Electric</option>
+            <option value="flying">Flying</option>
+            <option value="psychic">Phychic</option>
+            <option value="bug">Bug</option>
+            <option value="rock">Rock</option>
+            <option value="ghost">Ghost</option>
+            <option value="dragon">Dragon</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
+            <option value="fairy">Fairy</option>
+          </select>
+
+          <input
+            type="text"
+            placeholder="Search Pokemon By name"
+            id="searchByName"
+          />
+        </div>
+      </div>
+
+      <div id="introSticky" class="sticky hide">
+        <h1>Pokemon Universe</h1>
+
+        <div class="filteration">
+          <select name="" id="filterByType">
+            <option value="" selected>Filter By Type</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="poison">Poison</option>
+            <option value="fighting">Fighting</option>
+            <option value="ice">Ice</option>
+            <option value="ground">Ground</option>
+            <option value="grass">Grass</option>
+            <option value="electric">Electric</option>
+            <option value="flying">Flying</option>
+            <option value="psychic">Phychic</option>
+            <option value="bug">Bug</option>
+            <option value="rock">Rock</option>
+            <option value="ghost">Ghost</option>
+            <option value="dragon">Dragon</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
+            <option value="fairy">Fairy</option>
+          </select>
+
+          <input
+            type="text"
+            placeholder="Search Pokemon By name"
+            id="searchByName"
+          />
+        </div>
+      </div>
+
+      <div id="pokemons"></div>
+
+      <footer><button id="loadMore">Load More</button></footer>
+    </div>
+
+    <script src="pokemon.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter in Table</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="filter">
+        <div class="left">
+          <input type="text" placeholder="Search by name..." id="search" /><br />
+
+          <label for="gen">Gender</label>
+          <select name="gen" id="gen">
+            <option value="">All</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <br />
+
+          <label for="active">Gender</label>
+          <select name="active" id="active">
+            <option value="">All Year</option>
+            <option value="2005">2005</option>
+            <option value="2011">2011</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+          </select>
+          <br />
+        </div>
+        <div class="right">
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Customer Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Email</th>
+              <th>Salary</th>
+              <th>Order</th>
+              <th>Last Seen</th>
+              <th>Total Spending</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

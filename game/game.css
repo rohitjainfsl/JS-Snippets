@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen3 {
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3rem;
+}
+
+.gayab {
+  display: none;
+  opacity: 0;
+}
+
+.dikhana {
+  display: flex;
+  opacity: 1;
+}
+
+.avatars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50vw;
+  margin: 3rem 0;
+}
+
+.avatars .avatar {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatars .avatar img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+}
+
+.imagesArea {
+  width: 100%;
+  height: calc(100% - 40px);
+  position: relative;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
+
+.blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.blur:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+
+@media all and (max-width: 992px){
+  .avatars{
+    width: 90vw;
+  }
+}
+@media all and (max-width: 768px){
+  .avatars{
+    flex-direction: column;
+  }
+  .avatars .avatar img{
+    margin-bottom: 1rem;
+  }
+}

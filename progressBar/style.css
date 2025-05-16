@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#wrapper {
+  text-align: center;
+}
+#bars {
+  width: 50vw;
+  margin: 3rem auto;
+  min-height: 300px;
+  padding: 1rem;
+  border: 2px solid;
+  border-radius: 1rem;
+}
+.bar {
+  background-color: rgb(78, 78, 243);
+  color: #fff;
+  width: 0;
+  height: 20px;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+@keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
