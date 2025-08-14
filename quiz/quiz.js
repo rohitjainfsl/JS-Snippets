@@ -97,7 +97,7 @@ timerDiv.innerHTML = timer;
 displayProgress();
 
 // START THE LOOP TO PRINT NEXT QUESTIONS
-const girraj = setInterval(() => {
+const interval = setInterval(() => {
   if (timer === 1) {
     if (didUserAnswer === false) userAnswers.push("NA");
     printQ();
@@ -148,7 +148,7 @@ function printQ() {
   didUserAnswer = false;
 
   if (i === questions.length) {
-    clearInterval(girraj);
+    clearInterval(interval);
 
     // COMPARE USER ANSWERS WITH ACTUAL ANSWERS AS PER RANDOM ORDER
     const score = compareUserAnswers();
