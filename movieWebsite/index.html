@@ -8,42 +8,38 @@
   </head>
   <body>
     <div id="wrapper">
-      <header></header>
-      <section id="hero"></section>
-      <section id="movies">
-        <div id="trending">
-          <header>
-            <h2>Trending Movies</h2>
-            <div class="toggler">
-              <button>Day</button>
-              <button>Week</button>
-            </div>
-          </header>
-          <div class="movieWrapper"></div>
-        </div>
-        <div id="popular">
-          <header>
-            <h2>Popular Movies</h2>
-            <div class="toggler">
-              <button>Movies</button>
-              <button>TV Shows</button>
-            </div>
-          </header>
-          <div class="movieWrapper"></div>
-        </div>
-        <div id="topRated">
-          <header>
-            <h2>Top Rated Movies</h2>
-            <div class="toggler">
-              <button>Movies</button>
-              <button>TV Shows</button>
-            </div>
-          </header>
-          <div class="movieWrapper"></div>
-        </div>
-      </section>
+      <div class="movie-wrapper">
+        <header>
+          <h2>Trending</h2>
+          <div class="btns">
+            <button id="trendingMoviesDay">Day</button>
+            <button id="trendingMoviesWeek">Week</button>
+          </div>
+        </header>
+        <section></section>
+      </div>
+      <div class="movie-wrapper">
+        <header>
+          <h2>What's Popular</h2>
+          <div class="btns">
+            <button id="popularMovies">Movies</button>
+            <button id="popularTvshows">TV Shows</button>
+          </div>
+        </header>
+        <section></section>
+      </div>
+      <div class="movie-wrapper">
+        <header>
+          <h2>Top Rated</h2>
+          <div class="btns">
+            <button id="topRatedMovies">Movies</button>
+            <button id="topRatedTvshows">TV Shows</button>
+          </div>
+        </header>
+        <section></section>
+      </div>
     </div>
 
-    <script type="module" src="scripts.js"></script>
+    <script src="scripts.js" type="module"></script>0
   </body>
 </html>
