@@ -5,12 +5,17 @@ const loadMoreButton = document.querySelector(".loadMore");
 
 window.addEventListener("load", async () => {
   const data = await getDataFromAPI(
-    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset
+    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset,
   );
-  //   console.log(data);
-  console.log(data.results);
+  // console.log(data.results);
 
-  populatePokemons(data);
+  // Batch fetch Pokémon data
+  const promises = data.results.map((pokemon) => getDataFromAPI(pokemon.url));
+  const pokemonData = await Promise.all(promises);
+
+  console.log(pokemonData);
+
+  populatePokemons(pokemonData);
 });
 
 function showExtraDiv(e) {
@@ -31,10 +36,8 @@ async function getDataFromAPI(url) {
   return result;
 }
 
-async function populatePokemons(data) {
-  // Batch fetch Pokémon data
-  const promises = data.results.map((pokemon) => getDataFromAPI(pokemon.url));
-  const pokemonData = await Promise.all(promises);
+async function populatePokemons(pokemonData) {
+  const fragment = document.createDocumentFragment();
 
   // Loop through fetched data and populate DOM
   pokemonData.forEach((pokemon) => {
@@ -48,7 +51,7 @@ async function populatePokemons(data) {
     name.innerText = pokemon.name;
 
     const type = document.createElement("p");
-    type.innerText = "Type: " + pokemon.types[0].type.name;
+    type.innerText = "Type: " +pokemon.types.map((t) => t.type.name).join(", ");
 
     const knowMore = document.createElement("button");
     knowMore.innerText = "Know More";
@@ -80,15 +83,21 @@ async function populatePokemons(data) {
     div.append(knowMore);
     div.append(extraDiv);
 
-    pikapikaDiv.append(div);
+    fragment.append(div);
   });
+
+  pikapikaDiv.append(fragment);
 }
 
 loadMoreButton.addEventListener("click", async () => {
   offset = offset + limit;
   const response = await getDataFromAPI(
-    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset
+    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset,
   );
 
-  populatePokemons(response);
+  // Batch fetch Pokémon data
+  const promises = response.results.map((pokemon) => getDataFromAPI(pokemon.url));
+  const pokemonData = await Promise.all(promises);
+
+  populatePokemons(pokemonData);
 });
