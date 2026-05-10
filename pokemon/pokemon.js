@@ -9,9 +9,17 @@ const intro = document.querySelector("#intro");
 const stickyIntro = document.querySelector(".sticky");
 let done = true;
 
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 window.addEventListener("load", async () => {
   const initialData = await getDataFromAPI(
-    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset
+    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset,
   );
 
   const promises = initialData.results.map((pokeObj) => {
@@ -19,7 +27,6 @@ window.addEventListener("load", async () => {
   });
 
   const finalData = await Promise.all(promises);
-  console.log(finalData);
   pokemons.push(...finalData);
   displayPokemons(finalData);
 });
@@ -28,7 +35,7 @@ loadMoreBtn.addEventListener("click", loadMorePokemons);
 
 filterByType.addEventListener("change", filterPokemons);
 
-searchByName.addEventListener("keyup", searchPokemons);
+searchByName.addEventListener("keyup", debounce(searchPokemons, 200));
 
 function searchPokemons(e) {
   const searchTerm = e.target.value;
@@ -45,8 +52,7 @@ function searchPokemons(e) {
   });
 
   if (copy.length === 0) {
-    pokemonsDiv.innerHTML =
-      "<p class='noPokemon'>POKEMON NOT FOUND</p>";
+    pokemonsDiv.innerHTML = "<p class='noPokemon'>POKEMON NOT FOUND</p>";
   } else {
     pokemonsDiv.innerHTML = "";
     displayPokemons(copy);
@@ -65,8 +71,7 @@ function filterPokemons(e) {
       return pokemon.types[0].type.name === e.target.value;
     });
     if (copy.length === 0) {
-      pokemonsDiv.innerHTML =
-        "<p class='noPokemon'>POKEMON NOT FOUND</p>";
+      pokemonsDiv.innerHTML = "<p class='noPokemon'>POKEMON NOT FOUND</p>";
     } else {
       pokemonsDiv.innerHTML = "";
       displayPokemons(copy);
@@ -77,7 +82,7 @@ function filterPokemons(e) {
 async function loadMorePokemons() {
   offset += limit;
   const newData = await getDataFromAPI(
-    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset
+    "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset,
   );
 
   const promises = newData.results.map((pokeObj) => {
@@ -112,7 +117,8 @@ function displayPokemons(pokemonsToPrint) {
     img.src = pokemon.sprites.other.dream_world.front_default;
 
     type.innerHTML =
-      "<strong>Type: </strong>" + pokemon.types.map((t) => t.type.name).join(", ");
+      "<strong>Type: </strong>" +
+      pokemon.types.map((t) => t.type.name).join(", ");
 
     front.append(img, name, type);
     pokemonInner.append(front, back);
