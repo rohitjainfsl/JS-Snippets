@@ -32,6 +32,13 @@ searchByName.addEventListener("keyup", searchPokemons);
 
 function searchPokemons(e) {
   const searchTerm = e.target.value;
+
+  if (searchTerm !== "") {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "";
+  }
+
   let copy = pokemons;
   copy = copy.filter((pokemon) => {
     return pokemon.name.toLowerCase().includes(searchTerm);
@@ -39,7 +46,7 @@ function searchPokemons(e) {
 
   if (copy.length === 0) {
     pokemonsDiv.innerHTML =
-      "<p class='noPokemon'>NO POKEMON FOUND. CHANGE YOUR SEARCH TERM....</p>";
+      "<p class='noPokemon'>POKEMON NOT FOUND</p>";
   } else {
     pokemonsDiv.innerHTML = "";
     displayPokemons(copy);
@@ -48,23 +55,27 @@ function searchPokemons(e) {
 
 function filterPokemons(e) {
   if (e.target.value === "") {
+    loadMoreBtn.style.display = "";
     pokemonsDiv.innerHTML = "";
     displayPokemons(pokemons);
   } else {
+    loadMoreBtn.style.display = "none";
     let copy = pokemons;
     copy = copy.filter((pokemon) => {
       return pokemon.types[0].type.name === e.target.value;
     });
-    console.log(copy);
-
-    pokemonsDiv.innerHTML = "";
-    displayPokemons(copy);
+    if (copy.length === 0) {
+      pokemonsDiv.innerHTML =
+        "<p class='noPokemon'>POKEMON NOT FOUND</p>";
+    } else {
+      pokemonsDiv.innerHTML = "";
+      displayPokemons(copy);
+    }
   }
 }
 
 async function loadMorePokemons() {
   offset += limit;
-  console.log(offset);
   const newData = await getDataFromAPI(
     "https://pokeapi.co/api/v2/pokemon?limit=" + limit + "&offset=" + offset
   );
@@ -74,14 +85,14 @@ async function loadMorePokemons() {
   });
 
   const finalData = await Promise.all(promises);
-  console.log(finalData);
   pokemons.push(...finalData);
   displayPokemons(finalData);
 }
 
 function displayPokemons(pokemonsToPrint) {
+  const fragment = document.createDocumentFragment();
+
   pokemonsToPrint.forEach((pokemon) => {
-    console.log(pokemon);
     const pokemonParent = document.createElement("div");
     const pokemonInner = document.createElement("div");
     const front = document.createElement("div");
@@ -100,14 +111,17 @@ function displayPokemons(pokemonsToPrint) {
     name.innerText = pokemon.name;
     img.src = pokemon.sprites.other.dream_world.front_default;
 
-    type.innerHTML = "<strong>Type: </strong>" + pokemon.types[0].type.name;
+    type.innerHTML =
+      "<strong>Type: </strong>" + pokemon.types.map((t) => t.type.name).join(", ");
 
     front.append(img, name, type);
     pokemonInner.append(front, back);
     pokemonParent.append(pokemonInner);
 
-    pokemonsDiv.append(pokemonParent);
+    fragment.append(pokemonParent);
   });
+
+  pokemonsDiv.append(fragment);
 }
 
 function createBackDiv(pokemon) {
