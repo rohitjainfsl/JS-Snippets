@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.d-none {
+  display: none !important;
+}
+#wrapper {
+  height: 100vh;
+  background-color: rebeccapurple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#center {
+  width: 50vw;
+  min-height: 150px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.plus {
+  border: 2px solid rebeccapurple;
+  color: #fff;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 400ms;
+}
+.plus:hover {
+  background-color: #fff;
+  color: rebeccapurple;
+  transform: scale(1.2);
+}
+.second {
+  background-color: #fff;
+  box-shadow: 2px 2px 11px 1px rgba(0, 0, 0, 0.3);
+  width: 30vw;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: absolute;
+  z-index: 2;
+}
+.close {
+  background-color: #f00;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -8px;
+  right: -8px;
+  position: absolute;
+  cursor: pointer;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000;
+  position: relative;
+}
+.third {
+  display: flex;
+  order: 1;
+}
+
+.cross {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+}
