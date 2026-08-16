@@ -1,189 +1,104 @@
-const start = document.querySelector("#startBtn");
-const flip_card = document.querySelectorAll(".flip-card");
-const startTimerDiv = document.querySelector("#startTimer");
-let openPhotos = 0;
-let firstClickPhoto = "";
-let secondClickPhoto = "";
-let timerInterval = "";
-let gameFinished = false;
-let busy = false;
+const startBtn = document.getElementById("start");
+const screen1 = document.querySelector(".screen1");
+const screen2 = document.querySelector(".screen2");
+const boxs = document.querySelectorAll(".box");
+const boxInners = document.querySelectorAll(".box-inner");
+const timerDiv = document.querySelector("#timer");
 
-start.addEventListener("click", () => {
-  document.querySelector("#start").style.display = "none";
-  document.querySelector("#game").style.display = "flex";
-  document.querySelector("#startTimer").style.display = "flex";
-  document.querySelector("#clickCounter").style.display = "flex";
-  randomizePhotos();
+let openImageCount = 0;
+let openImages = [];
+let clicks = 0;
+let timer = 30;
+let interval;
 
-  //START THE TIMER
-  startTimer();
+const images = [
+  "amitabh.jpg",
+  "bhumi.jpg",
+  "chitrangda.webp",
+  "deepika.jpg",
+  "shahrukh.jpg",
+  "tom cruise.jpg",
+  "emma.webp",
+  "katrina.jpg",
+];
+let doubleImages = [...images, ...images];
 
-  //START THE CLICK COUNTER
-  startClickCounter();
-});
+//STARTING POINT
+startBtn.addEventListener("click", startTheGame);
 
-flip_card.forEach((card) => {
-  card.onclick = (e) => {
-    if (gameFinished || busy) {
-      return;
+function startTheGame() {
+  let finalArr = doubleImages.sort(() => Math.random() - 0.5);
+  putImagesInUI(finalArr);
+
+  boxs.forEach((box, index) =>
+    box.addEventListener("click", (e) => flipAndCheck(e, index)),
+  );
+
+  screen1.classList.add("d-none");
+  screen2.classList.remove("d-none");
+
+  timerDiv.innerText = timer--;
+  countdown();
+}
+
+function countdown() {
+  interval = setInterval(() => {
+    if (timer > 0) {
+      timerDiv.innerText = timer--;
+    } else {
+      clearTheBoard();
     }
-
-    const card_inner = card.children[0];
-    const styles = window.getComputedStyle(card_inner);
-    if (styles.getPropertyValue("transform") === "none") {
-      card_inner.style.transform = "rotateY(180deg)";
-      openPhotos++;
-
-      if (openPhotos === 1) {
-        firstClickPhoto = card_inner.children[1].children[0];
-      } else if (openPhotos === 2) {
-        busy = true;
-        secondClickPhoto = card_inner.children[1].children[0];
-
-        if (firstClickPhoto.src === secondClickPhoto.src) {
-          firstClickPhoto.classList.add("matched");
-          secondClickPhoto.classList.add("matched");
-          // 2 cards were clicked & we found a match,
-          // now reset everything
-          firstClickPhoto = "";
-          secondClickPhoto = "";
-          openPhotos = 0;
-          busy = false;
-
-          if (allPhotosFlipped()) {
-            setTimeout(finishGame, 0);
-          }
-        } else {
-          // 2 cards were clicked & we didn't found a match,
-          // now reset everything & close the cards
-          setTimeout(() => {
-            firstClickPhoto = "";
-            secondClickPhoto = "";
-            openPhotos = 0;
-            closeAll();
-          }, 1000);
-        }
-      }
-    }
-  };
-});
-
-function closeAll() {
-  flip_card.forEach((card) => {
-    if (
-      card.children[0].children[1].children[0].classList.contains(
-        "matched"
-      ) === false
-    ) {
-      card.children[0].removeAttribute("style");
-    }
-  });
-  busy = false;
-}
-
-function photos_match() {
-  setTimeout(() => {
-    openPhotos = 0;
-    return;
-  }, 400);
-}
-
-function randomizePhotos() {
-  const photos = [
-    "amitabh.jpg",
-    "bhumi.jpg",
-    "chitrangda.webp",
-    "deepika.jpg",
-    "shahrukh.jpg",
-    "tom cruise.jpg",
-  ];
-
-  const randomizedDeck = shufflePhotos([...photos, ...photos]);
-
-  flip_card.forEach((card, index) => {
-    card.children[0].children[1].children[0].src =
-      "images/" + randomizedDeck[index];
-  });
-}
-
-function shufflePhotos(photos) {
-  for (let shuffleCount = 0; shuffleCount < 3; shuffleCount++) {
-    for (let i = photos.length - 1; i > 0; i--) {
-      const randomIndex = getRandomNumber(i + 1);
-      [photos[i], photos[randomIndex]] = [photos[randomIndex], photos[i]];
-    }
-  }
-
-  return photos;
-}
-
-function getRandomNumber(max) {
-  return Math.floor(Math.random() * max);
-}
-
-function startTimer() {
-  timerInterval = setInterval(() => {
-    if (Number(startTimerDiv.innerHTML) === 1) {
-      clearInterval(timerInterval);
-      gameOver();
-    } else startTimerDiv.innerHTML = Number(startTimerDiv.innerHTML) - 1;
   }, 1000);
 }
 
-function startClickCounter() {
-  const gameBoard = document.querySelector("#game-board");
-  const clickCount = document.querySelector("#clickCounter span");
-  // console.log(gameBoard.getBoundingClientRect());
-  const gameBoardCoord = gameBoard.getBoundingClientRect();
+function clearTheBoard() {
+  clearInterval(interval);
+  screen2.classList.remove("d-none");
+}
 
-  //if(user click is inside the game board)
-  // (click.clientX > gameBoard.left && click.clientX < gameBoard.right) && (click.clientY > gameBoard.top && click.clientY < gameBoard.bottom)
-  // the click will be considered inside the game board
+function flipAndCheck(e, idx) {
+  //FLIP
+  const boxDiv = e.target.closest(".box");
+  if (openImageCount <= 1) {
+    boxDiv.firstElementChild.style.transform = "rotateY(180deg)";
+    boxDiv.firstElementChild.classList.add("show");
+    openImageCount++;
 
-  gameBoard.addEventListener("click", (e) => {
-    if (
-      e.clientX > gameBoardCoord.left &&
-      e.clientX < gameBoardCoord.right &&
-      e.clientY > gameBoardCoord.top &&
-      e.clientY < gameBoardCoord.bottom
-    ) {
-      // console.log("andar click hua hai");
-      clickCount.innerHTML = Number(clickCount.innerHTML) + 1;
+    openImages.push({ elem: boxDiv.lastElementChild.lastElementChild, idx });
+
+    //CHECK
+    if (openImageCount === 2) {
+      if (
+        openImages[0].elem.firstElementChild.src ===
+        openImages[1].elem.firstElementChild.src
+      ) {
+        resetCounters();
+      } else {
+        setTimeout(() => {
+          openImages.forEach((obj) => {
+            boxInners[obj.idx].classList.remove("show");
+            boxInners[obj.idx].style.transform = "rotateY(0)";
+          });
+
+          //RESET COUNTERS
+          resetCounters();
+        }, 1000);
+      }
+
+      setTimeout(() => {}, 1000);
     }
+    clicks++;
+  }
+}
+
+function resetCounters() {
+  openImageCount = 0;
+  openImages.length = 0;
+}
+
+function putImagesInUI(arr) {
+  boxInners.forEach((inner, index) => {
+    const backImageElem = inner.lastElementChild.firstChild;
+    backImageElem.src = `images/${arr[index]}`;
   });
-}
-
-function gameOver() {
-  document.querySelector("#game").style.display = "none";
-  document.querySelector("#startTimer").style.display = "none";
-}
-
-function allPhotosFlipped() {
-  return document.querySelectorAll(".matched").length === flip_card.length;
-}
-
-function finishGame() {
-  gameFinished = true;
-  clearInterval(timerInterval);
-
-  const clickCount = document.querySelector("#clickCounter span").innerHTML;
-  const timeRemaining = startTimerDiv.innerHTML;
-  const gameOverScreen = document.querySelector("#over");
-  const score = document.querySelector("#score");
-
-  gameOverScreen.querySelector("h1").innerHTML = "YOU WON!";
-  score.innerHTML = `Clicks: ${clickCount}<br />Time Remaining: ${timeRemaining}`;
-  gameOverScreen.style.display = "flex";
-  gameOverScreen.style.position = "fixed";
-  gameOverScreen.style.inset = "0";
-  gameOverScreen.style.zIndex = "999";
-  gameOverScreen.style.background = "rgba(0, 0, 0, 0.9)";
-  gameOverScreen.style.color = "#fff";
-  gameOverScreen.style.justifyContent = "center";
-  gameOverScreen.style.alignItems = "center";
-  gameOverScreen.style.flexDirection = "column";
-  gameOverScreen.style.textAlign = "center";
-  gameOverScreen.style.fontSize = "3rem";
-  gameOverScreen.style.fontWeight = "900";
-  score.style.marginTop = "1rem";
 }
