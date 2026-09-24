@@ -8,17 +8,35 @@
   </head>
   <body>
     <div id="wrapper">
-      <header>
+      <div class="screen screen1">
+        <h1>Hi there, enter your details to get started</h1>
+        <form action="">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Your name"
+              id="name"
+              name="name"
+              autofocus
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your email" id="email" name="email" required />
+          </div>
+          <div class="form-group"><button type="submit">Enter</button></div>
+        </form>
+      </div>
+      <header class="d-none">
         <h2>Find all pairs in the least amount of time</h2>
       </header>
-      <div class="screen screen1">
+      <div class="screen screen2 d-none">
         <button id="start">Start Game</button>
       </div>
-      <div class="screen screen2 d-none">
+      <div class="screen screen3 d-none">
         <div id="numbers">
           <p id="timer"></p>
           <p id="clicks"></p>
-          
         </div>
         <div class="grid">
           <div class="box">
